@@ -16,7 +16,8 @@
     "playing cards",
     "cards",
     "game",
-    "card game"
+    "card game",
+    "deberts"
   ],
   "devDependencies": {
     "@tsconfig/node14": "^1.0.0",

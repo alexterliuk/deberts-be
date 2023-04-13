@@ -6,8 +6,8 @@ export default [
   {
     input: 'src/index.ts',
     output: {
-      name: 'cards',
-      file: 'dist/playing-cards.bundle.umd.js',
+      name: 'deberts',
+      file: 'dist/deberts.bundle.umd.js',
       format: 'umd',
     },
     plugins: [
