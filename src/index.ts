@@ -1,7 +1,9 @@
-import cds from '@alexterliuk/cards-on-table';
+import cardsOnTable from '@alexterliuk/cards-on-table';
+import { debertsData, playerQty } from './data';
 
-const app = {
-  cds,
+const deberts = {
+  cardsOnTable,
+  table: cardsOnTable.createTable(debertsData, playerQty),
 };
 
-export default app;
+export default deberts;
