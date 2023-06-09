@@ -1,5 +1,10 @@
 import { CardNameType, SuitNameType } from '../data/types';
 
+export type GameStartActionType = {
+  type: 'GAME_START';
+  players: (number | string)[]; // number id for registered users, one-time string id for non-registered
+};
+
 export const enum PlayerActionTypeEnum {
   MOVE = 'MOVE',
   SWAP_CARD = 'SWAP_CARD',

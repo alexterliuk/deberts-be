@@ -1,6 +1,6 @@
 import { SuitCardsData } from '@alexterliuk/cards-on-table';
 
-const suitCardsData: SuitCardsData = [
+const SUIT_CARDS_DATA: SuitCardsData = [
   // name, value, rank
   ['ace', 11, 8],
   ['ten', 10, 7],
@@ -12,7 +12,7 @@ const suitCardsData: SuitCardsData = [
   ['seven', 0, 1],
 ];
 
-const trumpSuitCardsData: SuitCardsData = [
+const TRUMP_SUIT_CARDS_DATA: SuitCardsData = [
   // name, value, rank
   ['jack', 20, 8],
   ['nine', 14, 7],
@@ -24,15 +24,23 @@ const trumpSuitCardsData: SuitCardsData = [
   ['seven', 0, 1],
 ];
 
-const spadesSuitData = { name: 'spades', cardsData: suitCardsData };
-const heartsSuitData = { name: 'hearts', cardsData: suitCardsData };
-const diamondsSuitData = { name: 'diamonds', cardsData: suitCardsData };
-const clubsSuitData = { name: 'clubs', cardsData: suitCardsData };
+const SPADES_SUIT_DATA = { name: 'spades', cardsData: SUIT_CARDS_DATA };
+const HEARTS_SUIT_DATA = { name: 'hearts', cardsData: SUIT_CARDS_DATA };
+const DIAMONDS_SUIT_DATA = { name: 'diamonds', cardsData: SUIT_CARDS_DATA };
+const CLUBS_SUIT_DATA = { name: 'clubs', cardsData: SUIT_CARDS_DATA };
 
-export const debertsData = {
-  suitsData: [spadesSuitData, heartsSuitData, diamondsSuitData, clubsSuitData],
-  trumpSuitCardsData,
+export const DEBERTS_DATA = {
+  suitsData: [
+    SPADES_SUIT_DATA,
+    HEARTS_SUIT_DATA,
+    DIAMONDS_SUIT_DATA,
+    CLUBS_SUIT_DATA,
+  ],
+  trumpSuitCardsData: TRUMP_SUIT_CARDS_DATA,
 };
 
 // temporary constant, it'll come from the client at game start
-export const playersQty = 4;
+export const PLAYERS_QTY = 4;
+
+export const MIN_PLAYERS_QTY = 2;
+export const MAX_PLAYERS_QTY = 4;

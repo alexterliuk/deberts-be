@@ -11,7 +11,7 @@ function isPlayerTurnToMoveCard(
   const { nextMove: playerWhoMovesNext } = game;
   const isAllowed = player === playerWhoMovesNext;
 
-  return isAllowed ? true : { error: 1 };
+  return isAllowed ? true : { error: 2 };
 }
 
 function doesPlayerHaveCard(
@@ -23,7 +23,7 @@ function doesPlayerHaveCard(
     player.ownCards.find(c => c.name === card.name && c.suit === card.suit) !==
     undefined;
 
-  return hasCard ? true : { error: 2 };
+  return hasCard ? true : { error: 3 };
 }
 
 function isCardAllowedToMove(
@@ -70,7 +70,7 @@ function isCardAllowedToMove(
   // -- card.suit is trumpCard -> TRUE
   // -- card.suit is NOT trumpCard && ownCards doesn't have trumpCards -> TRUE
 
-  return { error: 3 };
+  return { error: 4 };
   // msg: player must move card with same suit as card of the starting player, or move trump card
 }
 

@@ -1,14 +1,30 @@
-import { MoveActionType, PlayerActionType } from '../actions/types';
+import {
+  GameStartActionType,
+  MoveActionType,
+  PlayerActionType,
+} from '../actions/types';
 import DebertsGame from '../game';
-import { PlayerMoveCheckerFunctionType } from '../rules/types';
+import {
+  GameStartCheckerFunctionType,
+  PlayerMoveCheckerFunctionType,
+} from '../rules/types';
 
 export default class RulesChecker {
-  actions: PlayerActionType[];
+  actions: (GameStartActionType | PlayerActionType)[];
   game: DebertsGame;
 
   constructor(actions: PlayerActionType[], game: DebertsGame) {
     this.actions = actions;
     this.game = game;
+  }
+
+  checkGameStart(
+    action: GameStartActionType,
+    checker: GameStartCheckerFunctionType,
+  ) {
+    const result = checker(action.players);
+
+    return result === true ? true : result.error;
   }
 
   checkMove(action: MoveActionType, checkers: PlayerMoveCheckerFunctionType[]) {
