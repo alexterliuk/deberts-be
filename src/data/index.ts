@@ -34,4 +34,5 @@ export const debertsData = {
   trumpSuitCardsData,
 };
 
-export const playerQty = 4;
+// temporary constant, it'll come from the client at game start
+export const playersQty = 4;
