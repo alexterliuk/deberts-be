@@ -47,9 +47,9 @@ export type DeclareBellaActionType = {
   playerIndex: number;
 };
 
-export type PlayerActionType =
-  | MoveActionType
-  | SwapActionType
-  | SuggestSuitActionType
-  | TradeCombinationActionType
-  | DeclareBellaActionType;
+// export type PlayerActionType =
+//   | MoveActionType
+//   | SwapActionType
+//   | SuggestSuitActionType
+//   | TradeCombinationActionType
+//   | DeclareBellaActionType;

@@ -37,3 +37,6 @@ export default class DebertsGame {
     this.table = table;
   }
 }
+
+// // @ts-ignore
+// console.log('BLA');

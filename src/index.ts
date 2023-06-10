@@ -1,4 +1,4 @@
-import RulesChecker from './check';
+import { checkGameStart, checkMove } from './check';
 import playerMovesCheckers from './rules/check-move';
 import {
   declareBella,
@@ -14,13 +14,14 @@ import { cardsOnTable } from './table'; // temporary import just for seeing lib 
 const actions = [move, swapCard, suggestSuit, tradeCombination, declareBella];
 const players = table.getAllPlayers();
 const game = new DebertsGame(players);
-const rulesChecker = new RulesChecker(actions, game);
 
 const deberts = {
   cardsOnTable, // temporary field just for seeing lib in dev console
   table,
-  rulesChecker,
-  playerMovesCheckers,
+  game,
+  actions,
+  checkGameStart,
+  checkMove,
 };
 
 export default deberts;
