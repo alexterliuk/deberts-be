@@ -16,7 +16,7 @@ export const move: MoveCardActionType = {
   playerIndex: 0,
 };
 
-export const swapCard: SwapCardsActionType = {
+export const swapCards: SwapCardsActionType = {
   type: PlayerActionTypeEnum.SWAP_CARDS,
   card: {
     name: 'nine',
