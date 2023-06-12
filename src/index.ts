@@ -1,5 +1,6 @@
-import { checkGameStart, checkMove } from './check';
-import playerMovesCheckers from './rules/check-move';
+import { checkGameStart, checkMoveCard } from './rules/check';
+import moveCardCheckers from './rules/move-card';
+import swapCardsChecker from './rules/swap-cards';
 import {
   declareBella,
   move,
@@ -21,7 +22,9 @@ const deberts = {
   game,
   actions,
   checkGameStart,
-  checkMove,
+  checkMoveCard,
+  moveCardCheckers,
+  swapCardsChecker,
 };
 
 export default deberts;

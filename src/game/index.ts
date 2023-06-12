@@ -1,6 +1,7 @@
-import { Player, Card, Suit, Deck, Table } from '@alexterliuk/cards-on-table';
+import { Player, Card, Table } from '@alexterliuk/cards-on-table';
 // import deberts from '..';
 import table from '../table';
+import { PlayerActionType } from '../actions/types';
 
 // const { table } = deberts;
 
@@ -10,13 +11,13 @@ import table from '../table';
 
 export default class DebertsGame {
   playersMap: Record<number, Player>;
-  actions: string[]; // for keeping history so that rew/fwd of steps is possible
+  actions: PlayerActionType[]; // for keeping history so that rew/fwd of steps is possible
   nextMove: Player;
   cardsInDeck: Card[];
   points: number[];
   lastWon: Player;
   willTake: Player;
-  // currentRound: number;
+  currentRound: number;
   // rounds: string[];
   table: Table;
 
@@ -34,6 +35,7 @@ export default class DebertsGame {
     this.points = [];
     this.lastWon = this.playersMap[0];
     this.willTake = this.playersMap[0];
+    this.currentRound = 0;
     this.table = table;
   }
 }

@@ -6,7 +6,13 @@ export type GameStartCheckerFunctionType = (
   players: (number | string)[],
 ) => true | { error: number };
 
-export type PlayerMoveCheckerFunctionType = (
+export type MoveCardCheckerFunctionType = (
+  player: Player,
+  card: CardFaceType,
+  game: DebertsGame,
+) => true | { error: number };
+
+export type SwapCardsCheckerFunctionType = (
   player: Player,
   card: CardFaceType,
   game: DebertsGame,

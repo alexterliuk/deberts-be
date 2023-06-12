@@ -1,14 +1,14 @@
 import {
   PlayerActionTypeEnum,
-  MoveActionType,
-  SwapActionType,
+  MoveCardActionType,
+  SwapCardsActionType,
   SuggestSuitActionType,
   TradeCombinationActionType,
   DeclareBellaActionType,
 } from './types';
 
-export const move: MoveActionType = {
-  type: PlayerActionTypeEnum.MOVE,
+export const move: MoveCardActionType = {
+  type: PlayerActionTypeEnum.MOVE_CARD,
   card: {
     name: 'ace',
     suit: 'spades',
@@ -16,8 +16,8 @@ export const move: MoveActionType = {
   playerIndex: 0,
 };
 
-export const swapCard: SwapActionType = {
-  type: PlayerActionTypeEnum.SWAP_CARD,
+export const swapCard: SwapCardsActionType = {
+  type: PlayerActionTypeEnum.SWAP_CARDS,
   card: {
     name: 'nine',
     suit: 'spades',

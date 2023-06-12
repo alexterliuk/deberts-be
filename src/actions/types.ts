@@ -6,8 +6,8 @@ export type GameStartActionType = {
 };
 
 export const enum PlayerActionTypeEnum {
-  MOVE = 'MOVE',
-  SWAP_CARD = 'SWAP_CARD',
+  MOVE_CARD = 'MOVE_CARD',
+  SWAP_CARDS = 'SWAP_CARDS',
   SUGGEST_SUIT = 'SUGGEST_SUIT',
   TRADE_COMBINATION = 'TRADE_COMBINATION',
   DECLARE_BELLA = 'DECLARE_BELLA',
@@ -18,21 +18,21 @@ export type CardFaceType = {
   suit: SuitNameType;
 };
 
-export type MoveActionType = {
-  type: PlayerActionTypeEnum.MOVE;
+export type MoveCardActionType = {
+  type: PlayerActionTypeEnum.MOVE_CARD;
   card: CardFaceType;
   playerIndex: number;
 };
 
-export type SwapActionType = {
-  type: PlayerActionTypeEnum.SWAP_CARD;
+export type SwapCardsActionType = {
+  type: PlayerActionTypeEnum.SWAP_CARDS;
   card: CardFaceType;
   playerIndex: number;
 };
 
 export type SuggestSuitActionType = {
   type: PlayerActionTypeEnum.SUGGEST_SUIT;
-  suit: SuitNameType;
+  suit: SuitNameType | 'NONE';
   playerIndex: number;
 };
 
@@ -47,9 +47,9 @@ export type DeclareBellaActionType = {
   playerIndex: number;
 };
 
-// export type PlayerActionType =
-//   | MoveActionType
-//   | SwapActionType
-//   | SuggestSuitActionType
-//   | TradeCombinationActionType
-//   | DeclareBellaActionType;
+export type PlayerActionType =
+  | MoveCardActionType
+  | SwapCardsActionType
+  | SuggestSuitActionType
+  | TradeCombinationActionType
+  | DeclareBellaActionType;

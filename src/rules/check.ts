@@ -1,7 +1,12 @@
-import { GameStartActionType, MoveActionType } from '../actions/types';
+import {
+  GameStartActionType,
+  MoveCardActionType,
+  SwapCardsActionType,
+} from '../actions/types';
 import {
   GameStartCheckerFunctionType,
-  PlayerMoveCheckerFunctionType,
+  MoveCardCheckerFunctionType,
+  SwapCardsCheckerFunctionType,
 } from './types';
 import DebertsGame from '../game';
 
@@ -14,9 +19,9 @@ export function checkGameStart(
   return result === true ? true : result.error;
 }
 
-export function checkPlayerMove(
-  action: MoveActionType,
-  checkers: PlayerMoveCheckerFunctionType[],
+export function checkMoveCard(
+  action: MoveCardActionType,
+  checkers: MoveCardCheckerFunctionType[],
   game: DebertsGame,
 ) {
   const { card, playerIndex } = action;
@@ -43,4 +48,18 @@ export function checkPlayerMove(
   );
 
   return success || error;
+}
+
+export function checkSwapCards(
+  action: SwapCardsActionType,
+  checker: SwapCardsCheckerFunctionType,
+  game: DebertsGame,
+) {
+  const { card, playerIndex } = action;
+  const { playersMap } = game;
+  const player = playersMap[playerIndex];
+
+  const result = checker(player, card, game);
+
+  return result === true ? true : result.error;
 }
