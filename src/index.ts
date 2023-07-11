@@ -3,6 +3,7 @@ import gameStartChecker from './rules/game-start';
 import suggestSuitChecker from './rules/suggest-suit';
 import moveCardCheckers from './rules/move-card';
 import swapCardsChecker from './rules/swap-cards';
+import declareBellaChecker from './rules/declare-bella';
 import {
   declareBella,
   move,
@@ -29,6 +30,7 @@ const deberts = {
   gameStartChecker,
   suggestSuitChecker,
   swapCardsChecker,
+  declareBellaChecker,
   moveCardCheckers,
 };
 

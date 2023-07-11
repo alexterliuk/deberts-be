@@ -39,6 +39,8 @@ export const DEBERTS_DATA = {
   trumpSuitCardsData: TRUMP_SUIT_CARDS_DATA,
 };
 
+export const BELLA_CARD_NAMES = ['queen', 'king'];
+
 // temporary constant, it'll come from the client at game start
 export const PLAYERS_QTY = 4;
 

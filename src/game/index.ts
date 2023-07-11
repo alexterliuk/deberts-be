@@ -19,6 +19,7 @@ export default class DebertsGame {
   lastWon: Player;
   willTake: Player;
   obligatedToWin: Player;
+  hasBella: Player | null;
   currentRound: number; // 0 when trading suits, 1 etc. during actual game
   // currentDealer: number;
   // rounds: string[];
@@ -40,6 +41,7 @@ export default class DebertsGame {
     this.lastWon = this.playersMap[0];
     this.willTake = this.playersMap[0];
     this.obligatedToWin = this.playersMap[0];
+    this.hasBella = null; // doesPlayerHaveBella will be called when game starts (currentRound 1)
     this.currentRound = 0;
     // this.currentDealer = 0;
     this.table = table;

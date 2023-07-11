@@ -24,3 +24,8 @@ export type SuggestSuitCheckerFunctionType = (
   suit: SuitNameType | 'NONE',
   game: DebertsGame,
 ) => true | { error: number };
+
+export type DeclareBellaCheckerFunctionType = (
+  player: Player,
+  game: DebertsGame,
+) => true | { error: number };
