@@ -1,5 +1,6 @@
-import { checkGameStart, checkMoveCard } from './rules/check';
+import { checkGameStart, checkMoveCard, checkSwapCards } from './rules/check';
 import gameStartChecker from './rules/game-start';
+import suggestSuitChecker from './rules/suggest-suit';
 import moveCardCheckers from './rules/move-card';
 import swapCardsChecker from './rules/swap-cards';
 import {
@@ -23,10 +24,12 @@ const deberts = {
   game,
   actions,
   checkGameStart,
+  checkSwapCards,
   checkMoveCard,
   gameStartChecker,
-  moveCardCheckers,
+  suggestSuitChecker,
   swapCardsChecker,
+  moveCardCheckers,
 };
 
 export default deberts;

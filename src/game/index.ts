@@ -11,13 +11,16 @@ import { PlayerActionType } from '../actions/types';
 
 export default class DebertsGame {
   playersMap: Record<number, Player>;
+  playersCount: number;
   actions: PlayerActionType[]; // for keeping history so that rew/fwd of steps is possible
   nextMove: Player;
   cardsInDeck: Card[];
   points: number[];
   lastWon: Player;
   willTake: Player;
-  currentRound: number;
+  obligatedToWin: Player;
+  currentRound: number; // 0 when trading suits, 1 etc. during actual game
+  // currentDealer: number;
   // rounds: string[];
   table: Table;
 
@@ -29,13 +32,16 @@ export default class DebertsGame {
       },
       {},
     );
+    this.playersCount = Object.keys(this.playersMap).length;
     this.actions = [];
     this.nextMove = this.playersMap[0];
     this.cardsInDeck = [];
     this.points = [];
     this.lastWon = this.playersMap[0];
     this.willTake = this.playersMap[0];
+    this.obligatedToWin = this.playersMap[0];
     this.currentRound = 0;
+    // this.currentDealer = 0;
     this.table = table;
   }
 }

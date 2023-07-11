@@ -1,11 +1,13 @@
 import {
   GameStartActionType,
   MoveCardActionType,
+  SuggestSuitActionType,
   SwapCardsActionType,
 } from '../actions/types';
 import {
   GameStartCheckerFunctionType,
   MoveCardCheckerFunctionType,
+  SuggestSuitCheckerFunctionType,
   SwapCardsCheckerFunctionType,
 } from './types';
 import DebertsGame from '../game';
@@ -60,6 +62,20 @@ export function checkSwapCards(
   const player = playersMap[playerIndex];
 
   const result = checker(player, card, game);
+
+  return result === true ? true : result.error;
+}
+
+export function checkSuggestSuit(
+  action: SuggestSuitActionType,
+  checker: SuggestSuitCheckerFunctionType,
+  game: DebertsGame,
+) {
+  const { suit, playerIndex } = action;
+  const { playersMap } = game;
+  const player = playersMap[playerIndex];
+
+  const result = checker(player, suit, game);
 
   return result === true ? true : result.error;
 }
