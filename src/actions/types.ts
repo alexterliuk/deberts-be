@@ -1,3 +1,4 @@
+import { Card } from '@alexterliuk/cards-on-table';
 import { CardNameType, SuitNameType } from '../data/types';
 
 export type GameStartActionType = {
@@ -9,7 +10,7 @@ export const enum PlayerActionTypeEnum {
   MOVE_CARD = 'MOVE_CARD',
   SWAP_CARDS = 'SWAP_CARDS',
   SUGGEST_SUIT = 'SUGGEST_SUIT',
-  TRADE_COMBINATION = 'TRADE_COMBINATION',
+  TRADE_COMBINATIONS = 'TRADE_COMBINATIONS',
   DECLARE_BELLA = 'DECLARE_BELLA',
 }
 
@@ -36,20 +37,24 @@ export type SuggestSuitActionType = {
   playerIndex: number;
 };
 
-export type TradeCombinationActionType = {
-  type: PlayerActionTypeEnum.TRADE_COMBINATION;
-  combination: CardFaceType[];
-  playerIndex: number;
-};
-
 export type DeclareBellaActionType = {
   type: PlayerActionTypeEnum.DECLARE_BELLA;
   playerIndex: number;
+};
+
+// Action with data from more than one player
+// There'll be one request from the client with data obtained from each player who trades
+export type TradeCombinationsActionType = {
+  type: PlayerActionTypeEnum.TRADE_COMBINATIONS;
+  records: {
+    playerIndex: number;
+    combination: CardFaceType & Pick<Card, 'rank'>[];
+  }[];
 };
 
 export type PlayerActionType =
   | MoveCardActionType
   | SwapCardsActionType
   | SuggestSuitActionType
-  | TradeCombinationActionType
-  | DeclareBellaActionType;
+  | DeclareBellaActionType
+  | TradeCombinationsActionType;

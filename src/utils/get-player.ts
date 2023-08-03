@@ -1,9 +1,7 @@
-import { PlayerActionType } from '../actions/types';
 import DebertsGame from '../game';
 
-export const getPlayer = (game: DebertsGame, action: PlayerActionType) => {
+export const getPlayer = (game: DebertsGame, playerIndex: number) => {
   const { playersMap } = game;
-  const { playerIndex } = action;
 
   return playersMap[playerIndex];
 };

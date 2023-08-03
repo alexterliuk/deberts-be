@@ -1,4 +1,4 @@
-import { Player } from '@alexterliuk/cards-on-table';
+import { Card, Player } from '@alexterliuk/cards-on-table';
 import { CardFaceType } from '../actions/types';
 import DebertsGame from '../game';
 import { SuitNameType } from '../data/types';
@@ -29,3 +29,13 @@ export type DeclareBellaCheckerFunctionType = (
   player: Player,
   game: DebertsGame,
 ) => true | { error: number };
+
+export type TradeCombinationsCheckerFunctionType = (
+  records: {
+    player: Player;
+    combination: CardFaceType & Pick<Card, 'rank'>[];
+  }[],
+  game: DebertsGame,
+) =>
+  | { player: Player; combination: CardFaceType[]; win: boolean }[]
+  | { error: number };
