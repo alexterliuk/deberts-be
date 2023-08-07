@@ -33,7 +33,7 @@ export type DeclareBellaCheckerFunctionType = (
 export type TradeCombinationsCheckerFunctionType = (
   records: {
     player: Player;
-    combination: CardFaceType & Pick<Card, 'rank'>[];
+    combination: (CardFaceType & Pick<Card, 'rank'>)[];
   }[],
   game: DebertsGame,
 ) =>

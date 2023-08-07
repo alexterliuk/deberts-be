@@ -9,13 +9,13 @@ import {
   move,
   suggestSuit,
   swapCards,
-  tradeCombination,
+  tradeCombinations,
 } from './actions';
 import DebertsGame from './game';
 import table from './table';
 import { cardsOnTable } from './table'; // temporary import just for seeing lib in dev console
 
-const actions = [move, swapCards, suggestSuit, tradeCombination, declareBella];
+const actions = [move, swapCards, suggestSuit, tradeCombinations, declareBella];
 const players = table.getAllPlayers();
 const game = new DebertsGame(players);
 

@@ -3,7 +3,7 @@ import {
   MoveCardActionType,
   SwapCardsActionType,
   SuggestSuitActionType,
-  TradeCombinationActionType,
+  TradeCombinationsActionType,
   DeclareBellaActionType,
 } from './types';
 
@@ -32,23 +32,50 @@ export const suggestSuit: SuggestSuitActionType = {
   playerIndex: 0,
 };
 
-export const tradeCombination: TradeCombinationActionType = {
-  type: PlayerActionTypeEnum.TRADE_COMBINATION,
-  combination: [
+export const tradeCombinations: TradeCombinationsActionType = {
+  type: PlayerActionTypeEnum.TRADE_COMBINATIONS,
+  records: [
     {
-      name: 'ace',
-      suit: 'spades',
+      combination: [
+        {
+          name: 'ace',
+          suit: 'spades',
+          rank: 8,
+        },
+        {
+          name: 'king',
+          suit: 'spades',
+          rank: 6,
+        },
+        {
+          name: 'queen',
+          suit: 'spades',
+          rank: 5,
+        },
+      ],
+      playerIndex: 0,
     },
     {
-      name: 'king',
-      suit: 'spades',
-    },
-    {
-      name: 'queen',
-      suit: 'spades',
+      combination: [
+        {
+          name: 'jack',
+          suit: 'hearts',
+          rank: 4,
+        },
+        {
+          name: 'ten',
+          suit: 'hearts',
+          rank: 7,
+        },
+        {
+          name: 'nine',
+          suit: 'hearts',
+          rank: 3,
+        },
+      ],
+      playerIndex: 1,
     },
   ],
-  playerIndex: 0,
 };
 
 export const declareBella: DeclareBellaActionType = {

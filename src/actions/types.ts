@@ -48,7 +48,7 @@ export type TradeCombinationsActionType = {
   type: PlayerActionTypeEnum.TRADE_COMBINATIONS;
   records: {
     playerIndex: number;
-    combination: CardFaceType & Pick<Card, 'rank'>[];
+    combination: (CardFaceType & Pick<Card, 'rank'>)[];
   }[];
 };
 
