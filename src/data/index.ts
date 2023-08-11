@@ -1,4 +1,4 @@
-import { SuitCardsData } from '@alexterliuk/cards-on-table';
+import { DeckCardsData, SuitCardsData } from '@alexterliuk/cards-on-table';
 
 const SUIT_CARDS_DATA: SuitCardsData = [
   // name, value, rank
@@ -29,7 +29,7 @@ const HEARTS_SUIT_DATA = { name: 'hearts', cardsData: SUIT_CARDS_DATA };
 const DIAMONDS_SUIT_DATA = { name: 'diamonds', cardsData: SUIT_CARDS_DATA };
 const CLUBS_SUIT_DATA = { name: 'clubs', cardsData: SUIT_CARDS_DATA };
 
-export const DEBERTS_DATA = {
+export const DEBERTS_DATA: DeckCardsData = {
   suitsData: [
     SPADES_SUIT_DATA,
     HEARTS_SUIT_DATA,
