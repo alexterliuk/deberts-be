@@ -7,5 +7,5 @@ export default function canPlayerDeclareBella(
 ) {
   const { hasBella } = game;
 
-  return player === hasBella;
+  return player === hasBella ? true : { error: 17 };
 }
