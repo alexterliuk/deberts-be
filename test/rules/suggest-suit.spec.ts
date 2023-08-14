@@ -33,19 +33,16 @@ const resetGame = () => {
   }
 };
 
-const addDummyActions = () => {
+const addDummyActions = (qty = 4) => {
   const dummyAction: PlayerActionType = {
     type: PlayerActionTypeEnum.SUGGEST_SUIT,
     suit: 'NONE',
     playerIndex: 0,
   };
 
-  game.actions = game.actions.concat([
-    dummyAction,
-    dummyAction,
-    dummyAction,
-    dummyAction,
-  ]);
+  const actions = [dummyAction, dummyAction, dummyAction, dummyAction];
+
+  game.actions = actions.slice(0, qty);
 };
 
 describe(`canPlayerSuggestSuit`, () => {
@@ -61,7 +58,7 @@ describe(`canPlayerSuggestSuit`, () => {
     });
   });
 
-  it(`[ERR] when player at first round suggests suit not equal to shown trump suit`, () => {
+  it(`[ERR] when player at first stage suggests suit not equal to shown trump suit`, () => {
     deck.openTrumpCard();
     deck.assignTrumpSuit(deck.openedTrumpCard?.suit ?? '');
 
@@ -74,7 +71,7 @@ describe(`canPlayerSuggestSuit`, () => {
       notTrumpSuit = 'hearts';
     } else if (trumpSuit === 'hearts') {
       notTrumpSuit = 'spades';
-    } else if (trumpSuit === 'spades') {
+    } else {
       notTrumpSuit = 'clubs';
     }
 
@@ -85,7 +82,7 @@ describe(`canPlayerSuggestSuit`, () => {
     resetGame();
   });
 
-  it(`[ERR] when player at second round suggests suit equal to shown trump suit`, () => {
+  it(`[ERR] when player at second stage suggests suit equal to shown trump suit`, () => {
     deck.openTrumpCard();
     deck.assignTrumpSuit(deck.openedTrumpCard?.suit ?? '');
     addDummyActions();
@@ -99,7 +96,7 @@ describe(`canPlayerSuggestSuit`, () => {
     resetGame();
   });
 
-  it(`[ERR] when player is dealer and at second round suggests 'NONE' as trump suit`, () => {
+  it(`[ERR] when player is dealer and at second stage suggests 'NONE' as trump suit`, () => {
     deck.openTrumpCard();
     deck.assignTrumpSuit(deck.openedTrumpCard?.suit ?? '');
     addDummyActions();

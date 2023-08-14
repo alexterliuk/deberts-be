@@ -7,13 +7,26 @@ export default function canPlayerSwapCards(
   card: CardFaceType,
   game: DebertsGame,
 ) {
-  const { actions, playersMap } = game;
+  const {
+    actions,
+    playersMap,
+    playersCount,
+    currentRound,
+    table: {
+      deck: { openedTrumpCard },
+    },
+  } = game;
 
-  const playersCount = Object.keys(playersMap).length;
-  const isFirstRoundOfSuggestingSuit = actions.length < playersCount;
+  const hasPlayingStarted = currentRound > 0;
 
-  if (!isFirstRoundOfSuggestingSuit) {
-    return { error: 5 }; // swapping cards only allowed in first round
+  if (hasPlayingStarted) {
+    return { error: 5 }; // swapping of cards only allowed when playing has not started yet
+  }
+
+  const isFirstStageOfSuggestingSuit = actions.length < playersCount;
+
+  if (!isFirstStageOfSuggestingSuit) {
+    return { error: 6 }; // swapping of cards not allowed at second stage
   }
 
   const hasRefusedToPlaySuitOfOpenedTrumpCard = actions.find(
@@ -24,15 +37,7 @@ export default function canPlayerSwapCards(
   );
 
   if (hasRefusedToPlaySuitOfOpenedTrumpCard) {
-    return { error: 6 }; // swapping cards is allowed only when player hasn't said 'pas' for this suit
-  }
-
-  const { openedTrumpCard } = game.table.deck;
-
-  const isCardOfCorrectSuit = card.suit === openedTrumpCard?.suit;
-
-  if (!isCardOfCorrectSuit) {
-    return { error: 7 };
+    return { error: 7 }; // swapping not allowed as player has already said 'pas' for suit of opened trump card
   }
 
   const hasCardSevenOfCorrectSuit =
