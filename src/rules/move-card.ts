@@ -30,22 +30,26 @@ function isCardAllowedToMove(
   player: Player,
   card: CardFaceType,
   game: DebertsGame,
+  isTesting?: boolean,
 ) {
   const { suit } = card;
 
   const { ownCards } = player;
   const {
-    table: { beatArea, trumpCardCell },
+    table: {
+      beatArea,
+      deck: { trumpSuitName },
+    },
   } = game;
 
   if (beatArea.length === 0) {
-    return true;
+    return isTesting ? { success: 1 } : true;
   }
 
   const suitOfFirstCard = beatArea[0].cards[0].suit;
 
   if (suit === suitOfFirstCard) {
-    return true;
+    return isTesting ? { success: 2 } : true;
   }
 
   const hasNoSameSuitAsSuitOfFirstCard = ownCards.every(
@@ -53,15 +57,13 @@ function isCardAllowedToMove(
   );
 
   if (hasNoSameSuitAsSuitOfFirstCard) {
-    const trumpSuit = trumpCardCell?.suit;
-
-    if (suit === trumpSuit) {
-      return true;
+    if (suit === trumpSuitName) {
+      return isTesting ? { success: 3 } : true;
     } else {
-      const hasNoTrumpCards = ownCards.every(c => c.suit !== trumpSuit);
+      const hasNoTrumpCards = ownCards.every(c => c.suit !== trumpSuitName);
 
       if (hasNoTrumpCards) {
-        return true;
+        return isTesting ? { success: 4 } : true;
       }
     }
   }
