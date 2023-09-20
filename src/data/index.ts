@@ -1,4 +1,5 @@
 import { DeckCardsData, SuitCardsData } from '@alexterliuk/cards-on-table';
+import { CardNameType } from './types';
 
 const SUIT_CARDS_DATA: SuitCardsData = [
   // name, value, rank
@@ -40,6 +41,17 @@ export const DEBERTS_DATA: DeckCardsData = {
 };
 
 export const BELLA_CARD_NAMES = ['queen', 'king'];
+
+export const CARD_RANKS_FOR_COMBINATION: Record<CardNameType, number> = {
+  ace: 8,
+  king: 7,
+  queen: 6,
+  jack: 5,
+  ten: 4,
+  nine: 3,
+  eight: 2,
+  seven: 1,
+};
 
 // temporary constant, it'll come from the client at game start
 export const PLAYERS_QTY = 4;

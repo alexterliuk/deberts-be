@@ -13,7 +13,7 @@ export const sort = <T, K extends keyof T>(
         const bOperand = b[index][key];
 
         if (typeof aOperand === 'number' && typeof bOperand === 'number') {
-          return direction === 'desc'
+          return direction === 'asc'
             ? aOperand - bOperand
             : bOperand - aOperand;
         }
@@ -34,7 +34,7 @@ export const sort = <T, K extends keyof T>(
     const bOperand = b[key];
 
     if (typeof aOperand === 'number' && typeof bOperand === 'number') {
-      return direction === 'desc' ? aOperand - bOperand : bOperand - aOperand;
+      return direction === 'asc' ? aOperand - bOperand : bOperand - aOperand;
     }
 
     return -1;
