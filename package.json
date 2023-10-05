@@ -9,7 +9,7 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "vitest ./test/**/*.spec.ts"
+    "test": "vitest ./src/test/**/*.spec.ts"
   },
   "keywords": [
     "playing cards",

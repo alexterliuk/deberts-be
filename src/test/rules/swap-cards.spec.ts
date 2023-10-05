@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import DebertsGame from '../../src/game';
+import DebertsGame from '../../client/game';
 import { Player, Deck } from '@alexterliuk/cards-on-table';
-import { DEBERTS_DATA } from '../../src/data';
-import canPlayerSwapCards from '../../src/rules/swap-cards';
-import { SuitNameType } from '../../src/data/types';
+import { DEBERTS_DATA } from '../../client/data';
+import canPlayerSwapCards from '../../client/rules/swap-cards';
+import { SuitNameType } from '../../client/data/types';
 import {
   PlayerActionType,
   PlayerActionTypeEnum,
-} from '../../src/actions/types';
+} from '../../client/actions/types';
 
 const gameDeck = new Deck(DEBERTS_DATA);
 const player1 = new Player(gameDeck);

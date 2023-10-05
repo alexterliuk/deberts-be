@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import DebertsGame from '../../src/game';
+import DebertsGame from '../../client/game';
 import { Player, Deck } from '@alexterliuk/cards-on-table';
-import { DEBERTS_DATA } from '../../src/data';
+import { DEBERTS_DATA } from '../../client/data';
 import {
   canPlayerTradeCombination,
   rankCombinations,
   isDebertsCombination,
-} from '../../src/rules/trade-combinations';
-import { PlayerActionTypeEnum } from '../../src/actions/types';
+} from '../../client/rules/trade-combinations';
+import { PlayerActionTypeEnum } from '../../client/actions/types';
 
 const gameDeck = new Deck(DEBERTS_DATA);
 const deckAllCardsQty = gameDeck.allCards.length;

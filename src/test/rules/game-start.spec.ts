@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isValidPlayersQty } from '../../src/rules/game-start';
+import { isValidPlayersQty } from '../../client/rules/game-start';
 
 describe(`isValidPlayersQty`, () => {
   it(`returns true when given 2-4 players`, () => {

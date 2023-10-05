@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import DebertsGame from '../../src/game';
+import DebertsGame from '../../client/game';
 import { Player, Deck } from '@alexterliuk/cards-on-table';
-import { DEBERTS_DATA } from '../../src/data';
-import moveCardCheckers from '../../src/rules/move-card';
-import { SuitNameType } from '../../src/data/types';
-import { CardFaceType } from '../../src/actions/types';
+import { DEBERTS_DATA } from '../../client/data';
+import moveCardCheckers from '../../client/rules/move-card';
+import { SuitNameType } from '../../client/data/types';
+import { CardFaceType } from '../../client/actions/types';
 
 const [
   isPlayerTurnToMoveCard,

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import DebertsGame from '../../src/game';
+import DebertsGame from '../../client/game';
 import { Player, Deck } from '@alexterliuk/cards-on-table';
-import { DEBERTS_DATA } from '../../src/data';
-import canPlayerDeclareBella from '../../src/rules/declare-bella';
+import { DEBERTS_DATA } from '../../client/data';
+import canPlayerDeclareBella from '../../client/rules/declare-bella';
 
 const deck = new Deck(DEBERTS_DATA);
 
