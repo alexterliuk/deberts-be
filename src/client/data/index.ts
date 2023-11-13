@@ -1,5 +1,5 @@
 import { DeckCardsData, SuitCardsData } from '@alexterliuk/cards-on-table';
-import { CardNameType } from './types';
+import { CardNameType, SuitNameType } from './types';
 
 const SUIT_CARDS_DATA: SuitCardsData = [
   // name, value, rank
@@ -39,6 +39,24 @@ export const DEBERTS_DATA: DeckCardsData = {
   ],
   trumpSuitCardsData: TRUMP_SUIT_CARDS_DATA,
 };
+
+export const CARD_NAMES: CardNameType[] = [
+  'ace',
+  'king',
+  'queen',
+  'jack',
+  'ten',
+  'nine',
+  'eight',
+  'seven',
+];
+
+export const SUIT_NAMES: SuitNameType[] = [
+  'spades',
+  'hearts',
+  'diamonds',
+  'clubs',
+];
 
 export const BELLA_CARD_NAMES = ['queen', 'king'];
 
