@@ -1,6 +1,5 @@
 import {
   DeclareBellaActionType,
-  GameStartActionType,
   MoveCardActionType,
   SuggestSuitActionType,
   SwapCardsActionType,
@@ -8,7 +7,6 @@ import {
 } from '../actions/types';
 import {
   DeclareBellaCheckerFunctionType,
-  GameStartCheckerFunctionType,
   MoveCardCheckerFunctionType,
   SuggestSuitCheckerFunctionType,
   SwapCardsCheckerFunctionType,
@@ -16,15 +14,6 @@ import {
 } from './types';
 import DebertsGame from '../game';
 import { getPlayer } from '../utils/get-player';
-
-export function checkGameStart(
-  action: GameStartActionType,
-  checker: GameStartCheckerFunctionType,
-) {
-  const result = checker(action.players);
-
-  return result === true ? true : result.error;
-}
 
 export function checkMoveCard(
   action: MoveCardActionType,

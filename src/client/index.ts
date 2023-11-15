@@ -1,5 +1,4 @@
-import { checkGameStart, checkMoveCard, checkSwapCards } from './rules/check';
-import gameStartChecker from './rules/game-start';
+import { checkMoveCard, checkSwapCards } from './rules/check';
 import suggestSuitChecker from './rules/suggest-suit';
 import moveCardCheckers from './rules/move-card';
 import swapCardsChecker from './rules/swap-cards';
@@ -24,10 +23,8 @@ const deberts = {
   table,
   game,
   actions,
-  checkGameStart,
   checkSwapCards,
   checkMoveCard,
-  gameStartChecker,
   suggestSuitChecker,
   swapCardsChecker,
   declareBellaChecker,

@@ -3,10 +3,6 @@ import { CardFaceType } from '../actions/types';
 import DebertsGame from '../game';
 import { SuitNameType } from '../data/types';
 
-export type GameStartCheckerFunctionType = (
-  players: (number | string)[],
-) => true | { error: number };
-
 export type MoveCardCheckerFunctionType = (
   player: Player,
   card: CardFaceType,
