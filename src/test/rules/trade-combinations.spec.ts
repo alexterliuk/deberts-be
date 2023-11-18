@@ -1,7 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { DebertsGame } from '../../client/game';
-import { Player, Deck } from '@alexterliuk/cards-on-table';
-import { DEBERTS_DATA } from '../../client/data';
 import {
   canPlayerTradeCombination,
   rankCombinations,
@@ -9,18 +7,15 @@ import {
 } from '../../client/rules/trade-combinations';
 import { PlayerActionTypeEnum } from '../../client/actions/types';
 
-const gameDeck = new Deck(DEBERTS_DATA);
-const deckAllCardsQty = gameDeck.allCards.length;
-const player1 = new Player(gameDeck);
-const player2 = new Player(gameDeck);
-const player3 = new Player(gameDeck);
-const player4 = new Player(gameDeck);
-
-const game = new DebertsGame([player1, player2, player3, player4]);
+const game = new DebertsGame(['a', 'b', 'c', 'd']);
 const deck = game.table.deck;
+const deckAllCardsQty = deck.allCards.length;
 const table = game.table;
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
+const player1 = game.playersRecs[0].player;
+const player2 = game.playersRecs[1].player;
+const player3 = game.playersRecs[2].player;
+const player4 = game.playersRecs[3].player;
 
 const aceSpades = deck.allCards[0];
 const tenSpades = deck.allCards[1];
@@ -57,8 +52,6 @@ const jackClubs = deck.allCards[28];
 const nineClubs = deck.allCards[29];
 const eightClubs = deck.allCards[30];
 const sevenClubs = deck.allCards[31];
-
-/* eslint-enable @typescript-eslint/no-unused-vars */
 
 const resetGame = () => {
   if (game.currentRound > 0) {

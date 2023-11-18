@@ -1,7 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { DebertsGame } from '../../client/game';
-import { Player, Deck } from '@alexterliuk/cards-on-table';
-import { DEBERTS_DATA } from '../../client/data';
 import canPlayerSwapCards from '../../client/rules/swap-cards';
 import { SuitNameType } from '../../client/data/types';
 import {
@@ -9,14 +7,10 @@ import {
   PlayerActionTypeEnum,
 } from '../../client/actions/types';
 
-const gameDeck = new Deck(DEBERTS_DATA);
-const player1 = new Player(gameDeck);
-const player2 = new Player(gameDeck);
-const player3 = new Player(gameDeck);
-const player4 = new Player(gameDeck);
-
-const game = new DebertsGame([player1, player2, player3, player4]);
+const game = new DebertsGame(['a', 'b', 'c', 'd']);
 const deck = game.table.deck;
+
+const player1 = game.playersRecs[0].player;
 
 const resetGame = () => {
   if (game.currentRound !== 0) {

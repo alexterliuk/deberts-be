@@ -1,15 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { DebertsGame } from '../../client/game';
-import { Player, Deck } from '@alexterliuk/cards-on-table';
-import { DEBERTS_DATA } from '../../client/data';
 import canPlayerDeclareBella from '../../client/rules/declare-bella';
 
-const deck = new Deck(DEBERTS_DATA);
+const game = new DebertsGame(['a', 'b']);
 
-const player1 = new Player(deck);
-const player2 = new Player(deck);
-
-const game = new DebertsGame([player1, player2]);
+const player1 = game.playersRecs[0].player;
+const player2 = game.playersRecs[1].player;
 
 describe(`canPlayerDeclareBella`, () => {
   it(`[ERR] when player declares Bella but doesn't have such combination`, () => {

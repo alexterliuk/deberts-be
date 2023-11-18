@@ -1,7 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { DebertsGame } from '../../client/game';
-import { Player, Deck } from '@alexterliuk/cards-on-table';
-import { DEBERTS_DATA } from '../../client/data';
 import moveCardCheckers from '../../client/rules/move-card';
 import { SuitNameType } from '../../client/data/types';
 import { CardFaceType } from '../../client/actions/types';
@@ -12,16 +10,15 @@ const [
   isCardAllowedToMove,
 ] = moveCardCheckers;
 
-const gameDeck = new Deck(DEBERTS_DATA);
-const deckCardsQty = gameDeck.allCards.length;
-const player1 = new Player(gameDeck);
-const player2 = new Player(gameDeck);
-const player3 = new Player(gameDeck);
-const player4 = new Player(gameDeck);
-
-const game = new DebertsGame([player1, player2, player3, player4]);
+const game = new DebertsGame(['a', 'b', 'c', 'd']);
 const deck = game.table.deck;
+const deckAllCardsQty = deck.allCards.length;
 const table = game.table;
+
+const player1 = game.playersRecs[0].player;
+const player2 = game.playersRecs[1].player;
+const player3 = game.playersRecs[2].player;
+const player4 = game.playersRecs[3].player;
 
 const resetGame = () => {
   if (game.currentRound !== 0) {
@@ -53,7 +50,7 @@ const resetGame = () => {
     player4.ownCards = [];
   }
 
-  if (deck.allCards.length !== deckCardsQty) {
+  if (deck.allCards.length !== deckAllCardsQty) {
     deck.returnAllCardsToDeck();
   }
 

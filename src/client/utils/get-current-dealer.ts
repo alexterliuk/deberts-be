@@ -4,7 +4,7 @@ export const getCurrentDealer = (game: DebertsGame) => {
   const { playersCount, currentRound, playersRecs } = game;
 
   if (currentRound === 0) {
-    return playersRecs[0];
+    return playersRecs[0].player;
   }
 
   const index =
