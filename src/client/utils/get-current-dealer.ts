@@ -1,10 +1,10 @@
 import { DebertsGame } from '../game';
 
 export const getCurrentDealer = (game: DebertsGame) => {
-  const { playersCount, currentRound, playersMap } = game;
+  const { playersCount, currentRound, playersRecs } = game;
 
   if (currentRound === 0) {
-    return playersMap[0];
+    return playersRecs[0];
   }
 
   const index =
@@ -12,7 +12,7 @@ export const getCurrentDealer = (game: DebertsGame) => {
       ? playersCount - 1
       : (currentRound % playersCount) - 1;
 
-  return playersMap[index];
+  return playersRecs[index].player;
 };
 
 // let getCurrentDealer = (game) => {

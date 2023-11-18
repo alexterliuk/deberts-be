@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import DebertsGame from '../../client/game';
+import { DebertsGame } from '../../client/game';
 import { Player, Deck } from '@alexterliuk/cards-on-table';
 import { DEBERTS_DATA } from '../../client/data';
 import {

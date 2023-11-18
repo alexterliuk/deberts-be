@@ -1,7 +1,7 @@
 import { DebertsGame } from '../game';
 
 export const getPlayer = (game: DebertsGame, playerIndex: number) => {
-  const { playersMap } = game;
+  const { playersRecs } = game;
 
-  return playersMap[playerIndex];
+  return playersRecs[playerIndex].player;
 };

@@ -9,7 +9,7 @@ export default function canPlayerSwapCards(
 ) {
   const {
     actions,
-    playersMap,
+    playersRecs,
     playersCount,
     currentRound,
     table: {
@@ -33,7 +33,7 @@ export default function canPlayerSwapCards(
     a =>
       a.type === PlayerActionTypeEnum.SUGGEST_SUIT &&
       a.suit === 'NONE' &&
-      playersMap[a.playerIndex] === player,
+      playersRecs[a.playerIndex].player === player,
   );
 
   if (hasRefusedToPlaySuitOfOpenedTrumpCard) {
