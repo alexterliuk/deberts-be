@@ -1,4 +1,4 @@
-import DebertsGame from '../game';
+import { DebertsGame } from '../game';
 
 export const getCurrentDealer = (game: DebertsGame) => {
   const { playersCount, currentRound, playersMap } = game;

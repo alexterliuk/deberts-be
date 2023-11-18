@@ -1,7 +1,7 @@
 import { Card } from '@alexterliuk/cards-on-table';
 import { DeclareBellaActionType } from '../actions/types';
 import { BELLA_CARD_NAMES } from '../data';
-import DebertsGame from '../game';
+import { DebertsGame } from '../game';
 import { getPlayer } from './get-player';
 
 export const doesPlayerHaveBella = (

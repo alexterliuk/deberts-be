@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Player } from '@alexterliuk/cards-on-table';
 import { CardFaceType } from '../actions/types';
-import DebertsGame from '../game';
+import { DebertsGame } from '../game';
 
 function isPlayerTurnToMoveCard(
   player: Player,

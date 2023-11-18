@@ -9,7 +9,7 @@ import { PlayerActionType } from '../actions/types';
 // Action comes from client ->
 // it is consumed by RulesChecker which checks Action against Rules (taking info for analysis from DebertsGame)
 
-export default class DebertsGame {
+export class DebertsGame {
   playersMap: Record<number, Player>;
   playersCount: number;
   actions: PlayerActionType[]; // for keeping history so that rew/fwd of steps is possible

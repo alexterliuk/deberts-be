@@ -1,5 +1,5 @@
 import { Player } from '@alexterliuk/cards-on-table';
-import DebertsGame from '../game';
+import { DebertsGame } from '../game';
 import { MoveCardActionType, PlayerActionTypeEnum } from '../actions/types';
 import { getPlayer } from '.';
 

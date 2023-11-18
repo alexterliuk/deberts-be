@@ -12,7 +12,7 @@ import {
   SwapCardsCheckerFunctionType,
   TradeCombinationsCheckerFunctionType,
 } from './types';
-import DebertsGame from '../game';
+import { DebertsGame } from '../game';
 import { getPlayer } from '../utils/get-player';
 
 export function checkMoveCard(

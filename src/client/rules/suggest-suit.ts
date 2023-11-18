@@ -1,6 +1,6 @@
 import { Player } from '@alexterliuk/cards-on-table';
 import { SuitNameType } from '../data/types';
-import DebertsGame from '../game';
+import { DebertsGame } from '../game';
 import { getCurrentDealer } from '../utils/get-current-dealer';
 
 export default function canPlayerSuggestSuit(

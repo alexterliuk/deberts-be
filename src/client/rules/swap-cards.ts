@@ -1,6 +1,6 @@
 import { Player } from '@alexterliuk/cards-on-table';
 import { CardFaceType, PlayerActionTypeEnum } from '../actions/types';
-import DebertsGame from '../game';
+import { DebertsGame } from '../game';
 
 export default function canPlayerSwapCards(
   player: Player,
