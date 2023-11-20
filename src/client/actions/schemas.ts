@@ -59,7 +59,7 @@ export const tradeCombinationsSchema = Joi.object({
 });
 
 export const createGameSchema = Joi.array()
-  .items(Joi.string())
+  .items(Joi.string().not('')) // TODO: forbid empty string with spaces on client
   .min(MIN_PLAYERS_QTY)
   .max(MAX_PLAYERS_QTY)
   .unique();
