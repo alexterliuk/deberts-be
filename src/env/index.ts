@@ -5,7 +5,7 @@ type Env = {
 };
 
 const readEnv = () => {
-  const readFile = fs.readFileSync('src/server/env.json', 'utf8');
+  const readFile = fs.readFileSync('src/env/env.json', 'utf8');
   let env = {} as Env;
 
   try {
