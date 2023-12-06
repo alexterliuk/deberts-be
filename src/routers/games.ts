@@ -4,6 +4,7 @@ import { DebertsGame, debertsGames } from '../client/game';
 import { createGameSchema } from '../client/actions/schemas';
 import { serializeDebertsGame } from '../client/game/sr/serialize-deberts-game';
 import { validateGameDB } from '../client/game/sr/utils';
+import { addPlayersNames } from '../client/game/utils';
 
 const games = {
   name: 'games',
@@ -46,21 +47,27 @@ const createGameHandler = async (
   try {
     const payload = req.payload;
     const validated = createGameSchema.validate(payload);
-
     if (validated.error) {
       return {
-        gameError: 1,
+        gameError: 1.1,
         message: 'To start a game you need 2-4 players',
       };
     }
 
     const game = new DebertsGame(payload);
+    const added = await addPlayersNames(game);
+    if (added.errorMessage) {
+      return {
+        DBError: 1.1,
+        message: added.errorMessage,
+      };
+    }
+
     const gameDB = serializeDebertsGame(game);
     const validatedGameDB = validateGameDB(gameDB);
-
     if (validatedGameDB.errorMessage) {
       return {
-        DBError: 1,
+        DBError: 1.2,
         message: validatedGameDB.errorMessage,
       };
     }
