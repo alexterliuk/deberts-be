@@ -13,4 +13,4 @@ export {
   PlayerSR,
   TableSR,
   DebertsGameDB,
-} from './types';
+} from '../types';

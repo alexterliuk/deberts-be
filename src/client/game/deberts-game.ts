@@ -1,5 +1,5 @@
-import cardsOnTable, { Player, Card, Table } from '@alexterliuk/cards-on-table';
-import { PlayerActionType } from '../actions/types';
+import cardsOnTable from '@alexterliuk/cards-on-table';
+import { Player, Card, Table, PlayerActionType } from './types';
 import { DEBERTS_DATA } from '../data';
 
 // EXPECTED FLOW:

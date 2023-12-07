@@ -1,5 +1,5 @@
 import { DebertsGame } from './deberts-game';
-import { DebertsGameDB } from './sr/types';
+import { DebertsGameDB } from './types';
 
 class DebertsGames {
   games: DebertsGame[];

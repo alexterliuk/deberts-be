@@ -5,7 +5,7 @@ import {
   Table,
   SuitCardsData,
 } from '@alexterliuk/cards-on-table';
-import { PlayerActionType } from '../../actions/types';
+import { PlayerActionType } from '../actions/types';
 
 export type CardSR = Pick<Card, 'name' | 'value' | 'suit' | 'rank' | 'opened'>;
 
@@ -65,3 +65,4 @@ export type DebertsGameDB = {
 };
 
 export { Card, Deck, Player, Table };
+export { PlayerActionType };
