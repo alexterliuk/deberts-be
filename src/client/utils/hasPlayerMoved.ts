@@ -10,6 +10,7 @@ export const hasPlayerMoved = (game: DebertsGame, player: Player) => {
 
   return !!moves.find(
     move =>
-      getPlayer(game, (move as MoveCardActionType).playerIndex) === player,
+      getPlayer(game, { index: (move as MoveCardActionType).playerIndex }) ===
+      player,
   );
 };

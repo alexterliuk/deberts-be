@@ -10,7 +10,7 @@ export const doesPlayerHaveBella = (
 ) => {
   const { trumpSuitName } = game.table.deck;
 
-  const player = getPlayer(game, action.playerIndex);
+  const player = getPlayer(game, { index: action.playerIndex });
   const { ownCards } = player;
 
   const getBellaCard = (name: string) =>

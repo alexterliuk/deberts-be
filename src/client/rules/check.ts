@@ -21,7 +21,7 @@ export function checkMoveCard(
   game: DebertsGame,
 ) {
   const { card } = action;
-  const player = getPlayer(game, action.playerIndex);
+  const player = getPlayer(game, { index: action.playerIndex });
   const copiedCheckers = checkers.slice();
 
   const { success, error } = copiedCheckers.reduce(
@@ -52,7 +52,7 @@ export function checkSwapCards(
 ) {
   const { card } = action;
 
-  const player = getPlayer(game, action.playerIndex);
+  const player = getPlayer(game, { index: action.playerIndex });
   const result = checker(player, card, game);
 
   return result === true ? true : result.error;
@@ -65,7 +65,7 @@ export function checkSuggestSuit(
 ) {
   const { suit } = action;
 
-  const player = getPlayer(game, action.playerIndex);
+  const player = getPlayer(game, { index: action.playerIndex });
   const result = checker(player, suit, game);
 
   return result === true ? true : result.error;
@@ -76,7 +76,7 @@ export function checkDeclareBella(
   checker: DeclareBellaCheckerFunctionType,
   game: DebertsGame,
 ) {
-  const player = getPlayer(game, action.playerIndex);
+  const player = getPlayer(game, { index: action.playerIndex });
   const result = checker(player, game);
 
   return result === true ? true : result.error;
@@ -88,7 +88,7 @@ export function checkTradeCombinations(
   game: DebertsGame,
 ) {
   const records = action.records.map(record => ({
-    player: getPlayer(game, record.playerIndex),
+    player: getPlayer(game, { index: record.playerIndex }),
     combination: record.combination,
   }));
 
