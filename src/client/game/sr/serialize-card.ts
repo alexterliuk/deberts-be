@@ -1,4 +1,4 @@
-import { Card, CardSR } from '.';
+import { Card, CardSR } from '../types';
 
 export const serializeCard = (card: Card): CardSR => ({
   name: card.name,

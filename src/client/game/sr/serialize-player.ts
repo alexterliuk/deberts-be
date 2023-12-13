@@ -1,4 +1,5 @@
-import { serializeCard, Player, PlayerSR } from '.';
+import { Player, PlayerSR } from '../types';
+import { serializeCard } from '.';
 
 /**
  * When restoring from db get:

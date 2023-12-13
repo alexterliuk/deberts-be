@@ -1,11 +1,7 @@
 import { DebertsGame } from '..';
-import {
-  serializeCard,
-  serializePlayer,
-  serializeTable,
-  DebertsGameDB,
-} from '.';
-import { getPlayerId } from './utils';
+import { DebertsGameDB } from '../types';
+import { getPlayerId } from '../utils';
+import { serializeCard, serializePlayer, serializeTable } from '.';
 
 export const serializeDebertsGame = (game: DebertsGame): DebertsGameDB => {
   const gamePlayersRecs = game.playersRecs;

@@ -1,4 +1,5 @@
-import { serializeCard, Deck, DeckSR } from '.';
+import { Deck, DeckSR } from '../types';
+import { serializeCard } from '.';
 
 export const serializeDeck = (deck: Deck): DeckSR => {
   const allCards = deck.allCards.map(card => serializeCard(card));

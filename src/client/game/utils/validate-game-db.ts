@@ -1,14 +1,4 @@
-import { DebertsGame } from '..';
-import { DebertsGameDB, Player } from '.';
-
-export const getPlayerId = (
-  player: Player,
-  playersRecs: DebertsGame['playersRecs'],
-) => {
-  const foundPlayer = playersRecs.find(rec => rec.player === player);
-
-  return foundPlayer?.id || 'NOT_FOUND';
-};
+import { DebertsGameDB } from '../types';
 
 export const validateGameDB = (gameDB: DebertsGameDB) => {
   let errorMessage = '';

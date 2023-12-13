@@ -1,6 +1,7 @@
 import { DebertsGame } from '..';
-import { serializeCard, serializeDeck, Table, TableSR } from '.';
-import { getPlayerId } from './utils';
+import { Table, TableSR } from '../types';
+import { getPlayerId } from '../utils';
+import { serializeCard, serializeDeck } from '.';
 
 export const serializeTable = (
   table: Table,
