@@ -55,21 +55,6 @@ const card30 = allCards[29]; // nine clubs
 const card31 = allCards[30]; // eight clubs
 const card32 = allCards[31]; // seven clubs
 
-// table: Table;
-// playersRecs: { id: string; name: string; player: Player }[]; // id for anon user should be e.g. 'a', 'b' etc.
-// playersCount: number;
-// actions: PlayerActionType[]; // for keeping history so that rew/fwd of steps is possible
-// cardsInDeck: Card[];
-// points: number[];
-// currentRound: number; // 0 when trading suits, 1 etc. during actual game
-// currentRoundActions: PlayerActionType[];
-// currentDealer: number; // index of player in playersRecs
-// nextMove: Player;
-// lastWon: Player;
-// willTake: Player;
-// obligatedToWin: Player;
-// hasBella: Player | null;
-
 describe(`restoreDebertsGame`, () => {
   it(`restores cards`, () => {
     expect([
