@@ -3,8 +3,7 @@ import mongoDB from 'mongodb';
 import { DebertsGame, debertsGames } from '../client/game';
 import { createGameSchema } from '../client/actions/schemas';
 import { serializeDebertsGame } from '../client/game/sr/serialize-deberts-game';
-import { validateGameDB } from '../client/game/sr/utils';
-import { addPlayersNames } from '../client/game/utils';
+import { addPlayersNames, validateGameDB } from '../client/game/utils';
 
 const games = {
   name: 'games',

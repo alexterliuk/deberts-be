@@ -6,6 +6,20 @@ export const restoreDeck = (
   deck: Deck,
   deckAllCardsMap: Record<string, Card>,
 ) => {
+  deckSR.allCards.forEach(cardSR => {
+    if (cardSR.opened) {
+      const id = `${cardSR.name}${cardSR.suit}`;
+      const card = deckAllCardsMap[id];
+
+      const isSameCard = cardSR.name === card.name && cardSR.suit === card.suit;
+      if (isSameCard) {
+        card.opened = true;
+      } else {
+        throw new Error('Failed to open card as it is not found.');
+      }
+    }
+  });
+
   const openedTrumpCardSR = deckSR.openedTrumpCard;
   if (openedTrumpCardSR) {
     const card = getCardFromDeck(openedTrumpCardSR, deckAllCardsMap);

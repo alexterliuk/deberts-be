@@ -8,12 +8,32 @@ export const restoreDebertsGame = (gameDB: DebertsGameDB) => {
   const playersIds = gameDB.playersRecs.map(rec => rec.id);
 
   const game = new DebertsGame(playersIds);
+  const deckAllCardsMap = mapDeckAllCards(game.table.deck);
 
   game.playersRecs.forEach((rec, index) => {
-    rec.name = gameDB.playersRecs[index].name;
-  });
+    const recSR = gameDB.playersRecs[index];
+    rec.name = recSR.name;
 
-  const deckAllCardsMap = mapDeckAllCards(game.table.deck);
+    if (recSR.player.bonuses.length > 0) {
+      rec.player.bonuses = recSR.player.bonuses;
+    }
+
+    if (recSR.player.combinations.length > 0) {
+      rec.player.combinations = recSR.player.combinations.map(combSR =>
+        combSR.map(cardSR => getCardFromDeck(cardSR, deckAllCardsMap)),
+      );
+    }
+
+    if (recSR.player.fines.length > 0) {
+      rec.player.fines = recSR.player.fines;
+    }
+
+    if (recSR.player.ownCards.length > 0) {
+      rec.player.ownCards = recSR.player.ownCards.map(cardSR =>
+        getCardFromDeck(cardSR, deckAllCardsMap),
+      );
+    }
+  });
 
   restoreTable(gameDB, game, deckAllCardsMap);
 
@@ -36,4 +56,6 @@ export const restoreDebertsGame = (gameDB: DebertsGameDB) => {
     gameDB.hasBellaPlayerId === null
       ? null
       : getPlayer(game, { id: gameDB.hasBellaPlayerId });
+
+  return game;
 };
