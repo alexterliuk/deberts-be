@@ -2,13 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { serializeDebertsGame } from '../../client/game/sr';
 import { CardSR } from '../../client/game/types';
 import {
-  game,
   declareBella,
   move,
   suggestSuit,
   swapCards,
   tradeCombinations,
-} from './mock';
+} from './actions-mock';
+import { game } from './mock';
 
 const serializedGame = serializeDebertsGame(game);
 

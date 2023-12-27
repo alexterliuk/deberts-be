@@ -5,7 +5,7 @@ import {
   suggestSuit,
   swapCards,
   tradeCombinations,
-} from '../../client/actions';
+} from './actions-mock';
 
 const game = new DebertsGame(['a', 'b']);
 const player1 = game.playersRecs[0].player;
@@ -79,4 +79,4 @@ game.willTake = player2;
 game.obligatedToWin = player1;
 game.hasBella = player1;
 
-export { game, declareBella, move, suggestSuit, swapCards, tradeCombinations };
+export { game };

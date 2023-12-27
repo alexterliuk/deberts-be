@@ -3,13 +3,13 @@ import { serializeDebertsGame } from '../../client/game/sr';
 import { restoreDebertsGame } from '../../client/game/rs';
 import { Card } from '../../client/game/types';
 import {
-  game,
   declareBella,
   move,
   suggestSuit,
   swapCards,
   tradeCombinations,
-} from './mock';
+} from './actions-mock';
+import { game } from './mock';
 
 const serializedGame = serializeDebertsGame(game);
 const restoredGame = restoreDebertsGame(serializedGame);

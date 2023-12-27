@@ -1,11 +1,11 @@
 import {
-  PlayerActionTypeEnum,
   MoveCardActionType,
   SwapCardsActionType,
   SuggestSuitActionType,
   TradeCombinationsActionType,
   DeclareBellaActionType,
-} from './types';
+  PlayerActionTypeEnum,
+} from '../../client/actions/types';
 
 export const move: MoveCardActionType = {
   type: PlayerActionTypeEnum.MOVE_CARD,

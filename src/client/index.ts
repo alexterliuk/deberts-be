@@ -9,7 +9,7 @@ import {
   suggestSuit,
   swapCards,
   tradeCombinations,
-} from './actions';
+} from '../test/game/actions-mock';
 import { DebertsGame } from './game';
 import table from './table';
 import { cardsOnTable } from './table'; // temporary import just for seeing lib in dev console
