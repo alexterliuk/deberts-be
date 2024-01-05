@@ -4,6 +4,8 @@ import { DebertsGame, debertsGames } from '../client/game';
 import { createGameSchema } from '../client/actions/schemas';
 import { serializeDebertsGame } from '../client/game/sr/serialize-deberts-game';
 import { addPlayersNames, validateGameDB } from '../client/game/utils';
+import { restoreDebertsGame } from '../client/game/rs';
+import { DebertsGameDB } from '../client/game/types';
 
 const games = {
   name: 'games',
@@ -14,17 +16,17 @@ const games = {
       handler: createGameHandler,
     });
 
-    // server.route({
-    //   method: 'GET',
-    //   path: '/games/{id}',
-    //   handler: getGameHandler,
-    // });
+    server.route({
+      method: 'GET',
+      path: '/games/{id}',
+      handler: getGameHandler,
+    });
 
-    // server.route({
-    //   method: 'DELETE',
-    //   path: '/games/{id}',
-    //   handler: deleteGameHandler,
-    // });
+    server.route({
+      method: 'DELETE',
+      path: '/games/{id}',
+      handler: deleteGameHandler,
+    });
   },
 };
 
@@ -83,6 +85,102 @@ const createGameHandler = async (
   }
 };
 
+/**
+ *
+ *
+ */
+const getGameHandler = async (
+  req: Hapi.Request & {
+    mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
+  },
+  h: Hapi.ResponseToolkit,
+) => {
+  try {
+    const id = req.params.id;
+    const ObjectID = req.mongo.ObjectID;
+
+    const gameDB = await req.mongo.db
+      .collection('games')
+      .findOne<DebertsGameDB>({ _id: new ObjectID(id) });
+
+    if (gameDB) {
+      const game = restoreDebertsGame(gameDB);
+      debertsGames.add(game, id);
+    }
+
+    return gameDB || h.response().code(404);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+/**
+ *
+ *
+ */
+const deleteGameHandler = async (
+  req: Hapi.Request & {
+    mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
+  },
+  h: Hapi.ResponseToolkit,
+) => {
+  try {
+    const id = req.params.id;
+    const ObjectID = req.mongo.ObjectID;
+
+    await req.mongo.db
+      .collection('games')
+      .findOneAndDelete({ _id: new ObjectID(id) });
+
+    return h.response().code(204);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+/**
+ * TODO: convert to be handler for '/games/{id}/record'
+ * TODO: add to DebertsGame fields:
+ *   time: { startedAt: DateTime string, finishedAt: DateTime string or empty string (not finished) }
+ */
+// const getGameRecordHandler = async (
+//   req: Hapi.Request & {
+//     mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
+//   },
+//   h: Hapi.ResponseToolkit,
+// ) => {
+//   try {
+//     const id = req.params.id;
+//     const ObjectID = req.mongo.ObjectID;
+
+//     const record = await req.mongo.db.collection('games').findOne(
+//       { _id: new ObjectID(id) },
+//       {
+//         projection: {
+//           playersRecs: {
+//             id: 1,
+//             name: 1,
+//             player: {
+//               fines: 1,
+//               bonuses: 1,
+//             },
+//           },
+//           points: 1,
+//           _id: 0,
+//         },
+//       },
+//     );
+
+//     return record;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
+/**
+ *
+ *
+ */
 // const getGameHandler = async (
 //   req: Hapi.Request & {
 //     mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
