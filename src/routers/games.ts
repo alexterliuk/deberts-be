@@ -4,7 +4,6 @@ import { DebertsGame, debertsGames } from '../client/game';
 import { createGameSchema } from '../client/actions/schemas';
 import { serializeDebertsGame } from '../client/game/sr/serialize-deberts-game';
 import { addPlayersNames, validateGameDB } from '../client/game/utils';
-import { restoreDebertsGame } from '../client/game/rs';
 import { DebertsGameDB } from '../client/game/types';
 
 const games = {
@@ -104,8 +103,7 @@ const getGameHandler = async (
       .findOne<DebertsGameDB>({ _id: new ObjectID(id) });
 
     if (gameDB) {
-      const game = restoreDebertsGame(gameDB);
-      debertsGames.add(game, id);
+      debertsGames.restore(gameDB, id);
     }
 
     return gameDB || h.response().code(404);

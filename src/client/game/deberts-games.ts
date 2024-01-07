@@ -1,5 +1,6 @@
 import { DebertsGame } from './deberts-game';
 import { DebertsGameDB } from './types';
+import { restoreDebertsGame } from './rs';
 
 class DebertsGames {
   games: DebertsGame[];
@@ -44,9 +45,10 @@ class DebertsGames {
     this.gamesMap = {};
   }
 
-  restore(gameDB: DebertsGameDB) {
-    // TODO: recreate DebertsGame from data stored in db (needed when a server crashs)
-    return true;
+  restore(gameDB: DebertsGameDB, id: string) {
+    this.delete(id);
+    const game = restoreDebertsGame(gameDB);
+    this.add(game, id);
   }
 }
 
