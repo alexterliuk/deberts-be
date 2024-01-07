@@ -49,11 +49,15 @@ export type TableSR = {
 
 export type DebertsGameDB = {
   table: TableSR;
-  playersRecs: { id: string; name: string; player: PlayerSR }[];
+  playersRecs: {
+    id: string;
+    name: string;
+    player: PlayerSR;
+    points: number;
+  }[];
   playersCount: number;
   actions: PlayerActionType[]; // for keeping history so that rew/fwd of steps is possible
   cardsInDeck: CardSR[];
-  points: number[];
   currentRound: number; // 0 when trading suits, 1 etc. during actual game
   currentRoundActions: PlayerActionType[];
   currentDealer: number; // index of player in playersRecs

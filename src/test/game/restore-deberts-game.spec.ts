@@ -374,6 +374,7 @@ describe(`restoreDebertsGame`, () => {
     expect(playersRecs[0].id).toBe('a');
     expect(playersRecs[0].name).toBe('Edgar');
     expect(playersRecs[0].player).toBe(player1);
+    expect(playersRecs[0].points).toBe(24);
 
     expect(player1.bonuses.length).toBe(1);
     expect(player1.bonuses[0]).toEqual({ name: 'Bella', value: 20 });
@@ -385,6 +386,7 @@ describe(`restoreDebertsGame`, () => {
     expect(playersRecs[1].id).toBe('b');
     expect(playersRecs[1].name).toBe('Julia');
     expect(playersRecs[1].player).toBe(player2);
+    expect(playersRecs[1].points).toBe(50);
 
     expect(player2.fines.length).toBe(1);
     expect(player2.fines[0]).toEqual({ name: 'Byte', value: 0 });
@@ -537,12 +539,6 @@ describe(`restoreDebertsGame`, () => {
     expect(cardsInDeck[0]).toBe(card1);
     expect(cardsInDeck[1]).toBe(card2);
     expect(cardsInDeck[2]).toBe(card3);
-  });
-
-  it(`restores points`, () => {
-    const { points } = restoredGame;
-
-    expect(points).toEqual([24, 50]);
   });
 
   it(`restores currentRound`, () => {

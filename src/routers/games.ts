@@ -26,6 +26,18 @@ const games = {
       path: '/games/{id}',
       handler: deleteGameHandler,
     });
+
+    server.route({
+      method: 'GET',
+      path: '/games/{id}/record',
+      handler: getGameRecordHandler,
+    });
+
+    // server.route({
+    //   method: 'GET',
+    //   path: '/games/records',
+    //   handler: getGamesRecordsHandler,
+    // });
   },
 };
 
@@ -137,43 +149,60 @@ const deleteGameHandler = async (
 };
 
 /**
- * TODO: convert to be handler for '/games/{id}/record'
- * TODO: add to DebertsGame fields:
- *   time: { startedAt: DateTime string, finishedAt: DateTime string or empty string (not finished) }
+ * TODO: create DebertsGameRecord class:
+ *   initiatedBy: id string
+ *   time: {
+ *     startedAt: DateTime string,
+ *     finishedAt: DateTime string or empty string (not finished)
+ *     pausedAt: DateTime string or empty string (finished)
+ *   }
+ * AND return DebertsGameRecord by getGameRecordHandler
  */
-// const getGameRecordHandler = async (
-//   req: Hapi.Request & {
-//     mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
-//   },
-//   h: Hapi.ResponseToolkit,
-// ) => {
-//   try {
-//     const id = req.params.id;
-//     const ObjectID = req.mongo.ObjectID;
+const getGameRecordHandler = async (
+  req: Hapi.Request & {
+    mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
+  },
+  h: Hapi.ResponseToolkit,
+) => {
+  try {
+    const id = req.params.id;
+    const ObjectID = req.mongo.ObjectID;
 
-//     const record = await req.mongo.db.collection('games').findOne(
-//       { _id: new ObjectID(id) },
-//       {
-//         projection: {
-//           playersRecs: {
-//             id: 1,
-//             name: 1,
-//             player: {
-//               fines: 1,
-//               bonuses: 1,
-//             },
-//           },
-//           points: 1,
-//           _id: 0,
-//         },
-//       },
-//     );
+    const record = await req.mongo.db
+      .collection<DebertsGameDB>('games')
+      .findOne(
+        { _id: new ObjectID(id) },
+        {
+          projection: {
+            playersRecs: {
+              id: 1,
+              name: 1,
+              player: {
+                fines: 1,
+                bonuses: 1,
+              },
+              points: 1,
+            },
+            _id: 0,
+          },
+        },
+      );
 
-//     return record;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
+    if (record) {
+      return record.playersRecs.map(r => ({
+        id: r.id,
+        name: r.name,
+        fines: r.player.fines,
+        bonuses: r.player.bonuses,
+        points: r.points,
+      }));
+    }
+
+    return [];
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 /**
  *

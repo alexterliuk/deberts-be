@@ -56,12 +56,14 @@ game.table.deck.takenCards = [card7, card8, card9, card10, card11, card12];
 game.playersRecs.forEach((rec, index) => {
   if (index === 0) {
     rec.name = 'Edgar';
+    rec.points = 24;
     rec.player.bonuses = [{ name: 'Bella', value: 20 }];
     rec.player.combinations = [[card1, card2, card3]];
   }
 
   if (index === 1) {
     rec.name = 'Julia';
+    rec.points = 50;
     rec.player.fines = [{ name: 'Byte', value: 0 }];
     rec.player.ownCards = [card1, card2, card3, card4, card5, card6];
   }
@@ -69,7 +71,6 @@ game.playersRecs.forEach((rec, index) => {
 
 game.actions = [move, swapCards, suggestSuit, tradeCombinations, declareBella];
 game.cardsInDeck = [card1, card2, card3];
-game.points = [24, 50];
 game.currentRound = 1;
 game.currentRoundActions = [swapCards, suggestSuit];
 game.currentDealer = 1;

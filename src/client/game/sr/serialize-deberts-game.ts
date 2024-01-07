@@ -12,12 +12,12 @@ export const serializeDebertsGame = (game: DebertsGame): DebertsGameDB => {
     id: rec.id,
     name: rec.name,
     player: serializePlayer(rec.player),
+    points: rec.points,
   }));
 
   const playersCount = game.playersCount;
   const actions = game.actions;
   const cardsInDeck = game.cardsInDeck.map(card => serializeCard(card));
-  const points = game.points;
   const currentRound = game.currentRound;
   const currentRoundActions = game.currentRoundActions;
   const currentDealer = game.currentDealer;
@@ -39,7 +39,6 @@ export const serializeDebertsGame = (game: DebertsGame): DebertsGameDB => {
     playersCount,
     actions,
     cardsInDeck,
-    points,
     currentRound,
     currentRoundActions,
     currentDealer,

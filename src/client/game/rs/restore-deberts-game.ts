@@ -13,6 +13,7 @@ export const restoreDebertsGame = (gameDB: DebertsGameDB) => {
   game.playersRecs.forEach((rec, index) => {
     const recSR = gameDB.playersRecs[index];
     rec.name = recSR.name;
+    rec.points = recSR.points;
 
     if (recSR.player.bonuses.length > 0) {
       rec.player.bonuses = recSR.player.bonuses;
@@ -43,7 +44,6 @@ export const restoreDebertsGame = (gameDB: DebertsGameDB) => {
     getCardFromDeck(cardSR, deckAllCardsMap),
   );
 
-  game.points = gameDB.points;
   game.currentRound = gameDB.currentRound;
   game.currentRoundActions = gameDB.currentRoundActions;
   game.currentDealer = gameDB.currentDealer;

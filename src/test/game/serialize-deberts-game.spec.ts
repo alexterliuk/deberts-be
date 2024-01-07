@@ -262,10 +262,6 @@ describe(`serializeDebertsGame`, () => {
     expect(cardsInDeck[2].opened).toBe(true);
   });
 
-  it(`serializes points`, () => {
-    expect(serializedGame.points).toEqual([24, 50]);
-  });
-
   it(`serializes currentRound`, () => {
     expect(serializedGame.currentRound).toBe(1);
   });

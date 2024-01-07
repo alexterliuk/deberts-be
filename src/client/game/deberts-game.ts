@@ -8,11 +8,10 @@ import { DEBERTS_DATA } from '../data';
 
 export class DebertsGame {
   table: Table;
-  playersRecs: { id: string; name: string; player: Player }[]; // id for anon user should be e.g. 'a', 'b' etc.
+  playersRecs: { id: string; name: string; player: Player; points: number }[]; // id for anon user should be e.g. 'a', 'b' etc.
   playersCount: number;
   actions: PlayerActionType[]; // for keeping history so that rew/fwd of steps is possible
   cardsInDeck: Card[];
-  points: number[];
   currentRound: number; // 0 when trading suits, 1 etc. during actual game
   currentRoundActions: PlayerActionType[];
   currentDealer: number; // index of player in playersRecs
@@ -24,14 +23,16 @@ export class DebertsGame {
 
   constructor(playersIds: string[]) {
     this.table = cardsOnTable.createTable(DEBERTS_DATA, playersIds.length);
-    this.playersRecs = this.table
-      .getAllPlayers()
-      .map((player, index) => ({ id: playersIds[index], name: '', player }));
+    this.playersRecs = this.table.getAllPlayers().map((player, index) => ({
+      id: playersIds[index],
+      name: '',
+      player,
+      points: 0,
+    }));
 
     this.playersCount = Object.keys(this.playersRecs).length;
     this.actions = [];
     this.cardsInDeck = [];
-    this.points = [];
     this.currentRound = 0;
     this.currentRoundActions = [];
     this.currentDealer = 0;
