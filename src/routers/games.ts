@@ -5,6 +5,7 @@ import { createGameSchema } from '../client/actions/schemas';
 import { serializeDebertsGame } from '../client/game/sr/serialize-deberts-game';
 import { addPlayersNames, validateGameDB } from '../client/game/utils';
 import { DebertsGameDB } from '../client/game/types';
+import { GameRecord, convertGameRecord } from './utils/convert-game-record';
 
 const games = {
   name: 'games',
@@ -33,11 +34,11 @@ const games = {
       handler: getGameRecordHandler,
     });
 
-    // server.route({
-    //   method: 'GET',
-    //   path: '/games/records',
-    //   handler: getGamesRecordsHandler,
-    // });
+    server.route({
+      method: 'GET',
+      path: '/games/records',
+      handler: getGameRecordsHandler,
+    });
   },
 };
 
@@ -168,9 +169,9 @@ const getGameRecordHandler = async (
     const id = req.params.id;
     const ObjectID = req.mongo.ObjectID;
 
-    const record = await req.mongo.db
-      .collection<DebertsGameDB>('games')
-      .findOne(
+    const result = await req.mongo.db
+      .collection('games')
+      .findOne<{ playersRecs: GameRecord }>(
         { _id: new ObjectID(id) },
         {
           projection: {
@@ -188,17 +189,7 @@ const getGameRecordHandler = async (
         },
       );
 
-    if (record) {
-      return record.playersRecs.map(r => ({
-        id: r.id,
-        name: r.name,
-        fines: r.player.fines,
-        bonuses: r.player.bonuses,
-        points: r.points,
-      }));
-    }
-
-    return [];
+    return result ? convertGameRecord(result.playersRecs) : [];
   } catch (err) {
     console.log(err);
   }
@@ -208,51 +199,41 @@ const getGameRecordHandler = async (
  *
  *
  */
-// const getGameHandler = async (
-//   req: Hapi.Request & {
-//     mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
-//   },
-//   h: Hapi.ResponseToolkit,
-// ) => {
-//   try {
-//     // const id = req.params.id;
-//     // const ObjectID = req.mongo.ObjectID;
+const getGameRecordsHandler = async (
+  req: Hapi.Request & {
+    mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
+  },
+  h: Hapi.ResponseToolkit,
+) => {
+  try {
+    const offset = Number(req.query.offset) || 0;
 
-//     // const game = await req.mongo.db.collection('games').findOne(
-//     //   { _id: new ObjectID(id) },
-//     //   {
-//     //     projection: {
-//     //       title: 1,
-//     //       plot: 1,
-//     //       cast: 1,
-//     //       year: 1,
-//     //       released: 1,
-//     //       // _id: 0,
-//     //     },
-//     //   },
-//     // );
+    const result = await req.mongo.db
+      .collection('games')
+      .find<{ playersRecs: GameRecord; _id: string }>(
+        {},
+        {
+          projection: {
+            playersRecs: {
+              id: 1,
+              name: 1,
+              player: {
+                fines: 1,
+                bonuses: 1,
+              },
+              points: 1,
+            },
+            _id: 1,
+          },
+        },
+      )
+      // .sort({ metacritic: -1 })
+      .skip(offset)
+      .limit(20)
+      .toArray();
 
-//     // return game;
-
-//     const id = req.params.id;
-//     const ObjectID = req.mongo.ObjectID;
-
-//     const game = await req.mongo.db.collection('games').findOne(
-//       { _id: new ObjectID(id) },
-//       {
-//         projection: {
-//           playersRecs: 1,
-//           nextMovePlayerId: 1,
-//           _id: 0,
-//         },
-//       },
-//     );
-
-//     console.log('===================================== GAME OBTAINED');
-//     console.log(debertsGames.get(id)?.playersRecs);
-
-//     return game;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
+    return result.map(r => convertGameRecord(r.playersRecs, r._id));
+  } catch (err) {
+    console.log(err);
+  }
+};
