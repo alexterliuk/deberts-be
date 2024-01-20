@@ -6,6 +6,7 @@ import { serializeDebertsGame } from '../client/game/sr/serialize-deberts-game';
 import { addPlayersNames, validateGameDB } from '../client/game/utils';
 import { DebertsGameDB } from '../client/game/types';
 import { GameRecord, convertGameRecord } from './utils/convert-game-record';
+import { getObjectId } from '../db/utils/get-object-id';
 
 const games = {
   name: 'games',
@@ -93,7 +94,7 @@ const createGameHandler = async (
     return result;
   } catch (err) {
     console.log(err);
-    return err;
+    return h.response().code(500);
   }
 };
 
@@ -104,24 +105,29 @@ const createGameHandler = async (
 const getGameHandler = async (
   req: Hapi.Request & {
     mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
+    params: { id?: string };
   },
   h: Hapi.ResponseToolkit,
 ) => {
   try {
-    const id = req.params.id;
-    const ObjectID = req.mongo.ObjectID;
+    const id = getObjectId(req.params.id);
+
+    if (id === null) {
+      return h.response().code(400);
+    }
 
     const gameDB = await req.mongo.db
       .collection('games')
-      .findOne<DebertsGameDB>({ _id: new ObjectID(id) });
+      .findOne<DebertsGameDB>({ _id: id });
 
     if (gameDB) {
-      debertsGames.restore(gameDB, id);
+      debertsGames.restore(gameDB, id.toString());
     }
 
     return gameDB || h.response().code(404);
   } catch (err) {
     console.log(err);
+    return h.response().code(500);
   }
 };
 
@@ -132,20 +138,23 @@ const getGameHandler = async (
 const deleteGameHandler = async (
   req: Hapi.Request & {
     mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
+    params: { id?: string };
   },
   h: Hapi.ResponseToolkit,
 ) => {
   try {
-    const id = req.params.id;
-    const ObjectID = req.mongo.ObjectID;
+    const id = getObjectId(req.params.id);
 
-    await req.mongo.db
-      .collection('games')
-      .findOneAndDelete({ _id: new ObjectID(id) });
+    if (id === null) {
+      return h.response().code(400);
+    }
+
+    await req.mongo.db.collection('games').findOneAndDelete({ _id: id });
 
     return h.response().code(204);
   } catch (err) {
     console.log(err);
+    return h.response().code(500);
   }
 };
 
@@ -162,17 +171,21 @@ const deleteGameHandler = async (
 const getGameRecordHandler = async (
   req: Hapi.Request & {
     mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
+    params: { id?: string };
   },
   h: Hapi.ResponseToolkit,
 ) => {
   try {
-    const id = req.params.id;
-    const ObjectID = req.mongo.ObjectID;
+    const id = getObjectId(req.params.id);
+
+    if (id === null) {
+      return h.response().code(400);
+    }
 
     const result = await req.mongo.db
       .collection('games')
       .findOne<{ playersRecs: GameRecord }>(
-        { _id: new ObjectID(id) },
+        { _id: id },
         {
           projection: {
             playersRecs: {
@@ -192,6 +205,7 @@ const getGameRecordHandler = async (
     return result ? convertGameRecord(result.playersRecs) : [];
   } catch (err) {
     console.log(err);
+    return h.response().code(500);
   }
 };
 
@@ -235,5 +249,6 @@ const getGameRecordsHandler = async (
     return result.map(r => convertGameRecord(r.playersRecs, r._id));
   } catch (err) {
     console.log(err);
+    return h.response().code(500);
   }
 };
