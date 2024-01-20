@@ -10,7 +10,21 @@ export type GameRecord = {
   points: number;
 }[];
 
-export const convertGameRecord = (record: GameRecord, gameId?: string) => {
+export type ConvertedGameRecord = {
+  gameId: string;
+  record: {
+    id: string;
+    name: string;
+    fines: PlayerSR['fines'];
+    bonuses: PlayerSR['bonuses'];
+    points: number;
+  }[];
+};
+
+export const convertGameRecord = (
+  record: GameRecord,
+  gameId: string,
+): ConvertedGameRecord => {
   const converted = record.map(r => ({
     id: r.id,
     name: r.name,
@@ -19,12 +33,8 @@ export const convertGameRecord = (record: GameRecord, gameId?: string) => {
     points: r.points,
   }));
 
-  if (gameId) {
-    return {
-      gameId,
-      record: converted,
-    };
-  }
-
-  return converted;
+  return {
+    gameId,
+    record: converted,
+  };
 };

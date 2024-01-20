@@ -202,7 +202,7 @@ const getGameRecordHandler = async (
         },
       );
 
-    return result ? convertGameRecord(result.playersRecs) : [];
+    return result ? convertGameRecord(result.playersRecs, id.toString()) : [];
   } catch (err) {
     console.log(err);
     return h.response().code(500);
