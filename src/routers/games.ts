@@ -159,14 +159,8 @@ const deleteGameHandler = async (
 };
 
 /**
- * TODO: create DebertsGameRecord class:
- *   initiatedBy: id string
- *   time: {
- *     startedAt: DateTime string,
- *     finishedAt: DateTime string or empty string (not finished)
- *     pausedAt: DateTime string or empty string (finished)
- *   }
- * AND return DebertsGameRecord by getGameRecordHandler
+ *
+ *
  */
 const getGameRecordHandler = async (
   req: Hapi.Request & {
