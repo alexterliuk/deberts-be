@@ -56,6 +56,15 @@ const card31 = allCards[30]; // eight clubs
 const card32 = allCards[31]; // seven clubs
 
 describe(`restoreDebertsGame`, () => {
+  it(`restores meta`, () => {
+    const { meta } = restoredGame;
+
+    expect(meta.initiatedBy).toBe(serializedGame.meta.initiatedBy);
+    expect(meta.time.startedAt).toBe(serializedGame.meta.time.startedAt);
+    expect(meta.time.finishedAt).toBe(serializedGame.meta.time.finishedAt);
+    expect(meta.time.pausedAt).toBe(serializedGame.meta.time.pausedAt);
+  });
+
   it(`restores cards`, () => {
     expect([
       card1.suit,

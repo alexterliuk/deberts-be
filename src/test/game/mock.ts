@@ -30,6 +30,15 @@ const card14 = allCards[13]; // nine hearts
 const card15 = allCards[14]; // eight hearts
 const card16 = allCards[15]; // seven hearts
 
+game.meta = {
+  initiatedBy: '659db948bccc6c1a001c7e89',
+  time: {
+    startedAt: '2024-02-01T10:07:03.124Z',
+    finishedAt: '',
+    pausedAt: '2024-02-01T10:07:03.124Z',
+  },
+};
+
 // TABLE
 game.table.beatArea = [{ player: player1, cards: [card3, card4] }];
 game.table.discardPile = [card14, card15, card16];

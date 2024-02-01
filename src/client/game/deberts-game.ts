@@ -1,12 +1,18 @@
 import cardsOnTable from '@alexterliuk/cards-on-table';
 import { Player, Card, Table, PlayerActionType } from './types';
 import { DEBERTS_DATA } from '../data';
+import { GameTime, createGameTime } from './utils/create-game-time';
+import { createInitiatedBy } from './utils/create-initiated-by';
 
 // EXPECTED FLOW:
 // Action comes from client ->
 // it is consumed by RulesChecker which checks Action against Rules (taking info for analysis from DebertsGame)
 
 export class DebertsGame {
+  meta: {
+    initiatedBy: string; // id
+    time: GameTime;
+  };
   table: Table;
   playersRecs: { id: string; name: string; player: Player; points: number }[]; // id for anon user should be e.g. 'a', 'b' etc.
   playersCount: number;
@@ -22,6 +28,10 @@ export class DebertsGame {
   hasBella: Player | null;
 
   constructor(playersIds: string[]) {
+    this.meta = {
+      initiatedBy: createInitiatedBy(playersIds[0]),
+      time: createGameTime(),
+    };
     this.table = cardsOnTable.createTable(DEBERTS_DATA, playersIds.length);
     this.playersRecs = this.table.getAllPlayers().map((player, index) => ({
       id: playersIds[index],

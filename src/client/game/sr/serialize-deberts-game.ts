@@ -4,6 +4,8 @@ import { getPlayerId } from '../utils';
 import { serializeCard, serializePlayer, serializeTable } from '.';
 
 export const serializeDebertsGame = (game: DebertsGame): DebertsGameDB => {
+  const meta = game.meta;
+
   const gamePlayersRecs = game.playersRecs;
 
   const table = serializeTable(game.table, gamePlayersRecs);
@@ -34,6 +36,7 @@ export const serializeDebertsGame = (game: DebertsGame): DebertsGameDB => {
     : game.hasBella;
 
   return {
+    meta,
     table,
     playersRecs,
     playersCount,

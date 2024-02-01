@@ -13,6 +13,15 @@ import { game } from './mock';
 const serializedGame = serializeDebertsGame(game);
 
 describe(`serializeDebertsGame`, () => {
+  it(`serializes meta`, () => {
+    const { meta } = serializedGame;
+
+    expect(meta.initiatedBy).toBe(game.meta.initiatedBy);
+    expect(meta.time.startedAt).toBe(game.meta.time.startedAt);
+    expect(meta.time.finishedAt).toBe(game.meta.time.finishedAt);
+    expect(meta.time.pausedAt).toBe(game.meta.time.pausedAt);
+  });
+
   it(`serializes table.beatArea`, () => {
     const { beatArea } = serializedGame.table;
 

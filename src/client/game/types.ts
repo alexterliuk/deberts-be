@@ -6,6 +6,7 @@ import {
   SuitCardsData,
 } from '@alexterliuk/cards-on-table';
 import { PlayerActionType } from '../actions/types';
+import { GameTime } from './utils/create-game-time';
 
 export type CardSR = Pick<Card, 'name' | 'value' | 'suit' | 'rank' | 'opened'>;
 
@@ -48,6 +49,10 @@ export type TableSR = {
 };
 
 export type DebertsGameDB = {
+  meta: {
+    initiatedBy: string;
+    time: GameTime;
+  };
   table: TableSR;
   playersRecs: {
     id: string;

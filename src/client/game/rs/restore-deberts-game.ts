@@ -10,6 +10,8 @@ export const restoreDebertsGame = (gameDB: DebertsGameDB) => {
   const game = new DebertsGame(playersIds);
   const deckAllCardsMap = mapDeckAllCards(game.table.deck);
 
+  game.meta = gameDB.meta;
+
   game.playersRecs.forEach((rec, index) => {
     const recSR = gameDB.playersRecs[index];
     rec.name = recSR.name;
