@@ -5,7 +5,7 @@ import {
   TradeCombinationsActionType,
   DeclareBellaActionType,
   PlayerActionTypeEnum,
-} from '../../client/actions/types';
+} from '../../client/data/types';
 
 export const move: MoveCardActionType = {
   type: PlayerActionTypeEnum.MOVE_CARD,

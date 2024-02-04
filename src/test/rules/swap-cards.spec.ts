@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { DebertsGame } from '../../client/game';
 import canPlayerSwapCards from '../../client/rules/swap-cards';
-import { SuitNameType } from '../../client/data/types';
 import {
+  SuitNameType,
   PlayerActionType,
   PlayerActionTypeEnum,
-} from '../../client/actions/types';
+} from '../../client/data/types';
 
 const game = new DebertsGame(['a', 'b', 'c', 'd']);
 const deck = game.table.deck;

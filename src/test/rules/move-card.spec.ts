@@ -1,8 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { DebertsGame } from '../../client/game';
 import moveCardCheckers from '../../client/rules/move-card';
-import { SuitNameType } from '../../client/data/types';
-import { CardFaceType } from '../../client/actions/types';
+import { SuitNameType, CardFaceType } from '../../client/data/types';
 
 const [
   isPlayerTurnToMoveCard,

@@ -1,10 +1,5 @@
 import Joi from 'joi';
-import {
-  CARD_NAMES,
-  SUIT_NAMES,
-  MIN_PLAYERS_QTY,
-  MAX_PLAYERS_QTY,
-} from '../data';
+import { CARD_NAMES, SUIT_NAMES, MIN_PLAYERS_QTY, MAX_PLAYERS_QTY } from '.';
 
 // CardFaceType
 const cardFaceSchema = Joi.object({

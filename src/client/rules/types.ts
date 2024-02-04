@@ -1,7 +1,6 @@
 import { Card, Player } from '@alexterliuk/cards-on-table';
-import { CardFaceType } from '../actions/types';
 import { DebertsGame } from '../game';
-import { SuitNameType } from '../data/types';
+import { CardFaceType, SuitNameType } from '../data/types';
 
 export type MoveCardCheckerFunctionType = (
   player: Player,

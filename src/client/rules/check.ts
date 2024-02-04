@@ -4,7 +4,7 @@ import {
   SuggestSuitActionType,
   SwapCardsActionType,
   TradeCombinationsActionType,
-} from '../actions/types';
+} from '../data/types';
 import {
   DeclareBellaCheckerFunctionType,
   MoveCardCheckerFunctionType,

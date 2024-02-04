@@ -1,5 +1,5 @@
 import { Player } from '@alexterliuk/cards-on-table';
-import { CardFaceType } from '../actions/types';
+import { CardFaceType } from '../data/types';
 import { DebertsGame } from '../game';
 
 function isPlayerTurnToMoveCard(

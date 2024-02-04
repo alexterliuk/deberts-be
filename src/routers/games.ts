@@ -1,7 +1,7 @@
 import Hapi from '@hapi/hapi';
 import mongoDB from 'mongodb';
 import { DebertsGame, debertsGames } from '../client/game';
-import { createGameSchema } from '../client/actions/schemas';
+import { createGameSchema } from '../client/data/schemas';
 import { serializeDebertsGame } from '../client/game/sr/serialize-deberts-game';
 import { addPlayersNames, validateGameDB } from '../client/game/utils';
 import { DebertsGameDB } from '../client/game/types';
@@ -104,8 +104,8 @@ const createGameHandler = async (
  */
 const getGameHandler = async (
   req: Hapi.Request & {
-    mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
-    params: { id?: string };
+    mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor }; // TODO: ObjectID is not needed
+    params: { id?: string }; // TODO: explain why id is optional here and in other places
   },
   h: Hapi.ResponseToolkit,
 ) => {
@@ -150,7 +150,7 @@ const deleteGameHandler = async (
     }
 
     await req.mongo.db.collection('games').findOneAndDelete({ _id: id });
-
+    // TODO: delete game also by debertsGames.delete
     return h.response().code(204);
   } catch (err) {
     console.log(err);

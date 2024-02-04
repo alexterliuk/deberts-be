@@ -5,7 +5,7 @@ import {
   Table,
   SuitCardsData,
 } from '@alexterliuk/cards-on-table';
-import { PlayerActionType } from '../actions/types';
+import { PlayerActionType } from '../data/types';
 import { GameTime } from './utils/create-game-time';
 
 export type CardSR = Pick<Card, 'name' | 'value' | 'suit' | 'rank' | 'opened'>;

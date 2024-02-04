@@ -2,7 +2,7 @@ import { Card, Player } from '@alexterliuk/cards-on-table';
 import { DebertsGame } from '../game';
 import { getCardRankForCombination, hasPlayerMoved, sort } from '../utils';
 import { CardNameType, SuitNameType } from '../data/types';
-import { CardFaceType } from '../actions/types';
+import { CardFaceType } from '../data/types';
 
 function canPlayerTradeCombination(
   records: { player: Player; combination: Card[] }[],

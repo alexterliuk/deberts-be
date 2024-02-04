@@ -1,6 +1,6 @@
 import { Player } from '@alexterliuk/cards-on-table';
 import { DebertsGame } from '../game';
-import { MoveCardActionType, PlayerActionTypeEnum } from '../actions/types';
+import { MoveCardActionType, PlayerActionTypeEnum } from '../data/types';
 import { getPlayer } from '.';
 
 export const hasPlayerMoved = (game: DebertsGame, player: Player) => {

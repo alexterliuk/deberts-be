@@ -5,7 +5,7 @@ import {
   rankCombinations,
   isDebertsCombination,
 } from '../../client/rules/trade-combinations';
-import { PlayerActionTypeEnum } from '../../client/actions/types';
+import { PlayerActionTypeEnum } from '../../client/data/types';
 
 const game = new DebertsGame(['a', 'b', 'c', 'd']);
 const deck = game.table.deck;
