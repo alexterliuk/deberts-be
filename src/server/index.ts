@@ -1,6 +1,7 @@
 import Hapi from '@hapi/hapi';
 import env from '../env';
 import games from '../routers/games';
+import playGame from '../routers/play-game';
 
 async function start() {
   const server: Hapi.Server = Hapi.server({
@@ -17,6 +18,7 @@ async function start() {
       },
     },
     { plugin: games },
+    { plugin: playGame },
   ]);
 
   await server.start();
