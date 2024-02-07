@@ -2,7 +2,7 @@ import { Player } from '@alexterliuk/cards-on-table';
 import { CardFaceType } from '../data/types';
 import { DebertsGame } from '../game';
 
-function isPlayerTurnToMoveCard(
+export function isPlayerTurnToMoveCard(
   player: Player,
   card: CardFaceType,
   game: DebertsGame,
@@ -13,7 +13,7 @@ function isPlayerTurnToMoveCard(
   return isAllowed ? true : { error: 2 };
 }
 
-function doesPlayerHaveCard(
+export function doesPlayerHaveCard(
   player: Player,
   card: CardFaceType,
   game: DebertsGame,
@@ -25,7 +25,7 @@ function doesPlayerHaveCard(
   return hasCard ? true : { error: 3 };
 }
 
-function isCardAllowedToMove(
+export function isCardAllowedToMove(
   player: Player,
   card: CardFaceType,
   game: DebertsGame,
@@ -74,9 +74,3 @@ function isCardAllowedToMove(
   return { error: 4 };
   // msg: player must move card with same suit as card of the starting player, or move trump card
 }
-
-export default [
-  isPlayerTurnToMoveCard,
-  doesPlayerHaveCard,
-  isCardAllowedToMove,
-];

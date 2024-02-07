@@ -3,7 +3,7 @@ import { SuitNameType } from '../data/types';
 import { DebertsGame } from '../game';
 import { getCurrentDealer } from '../utils/get-current-dealer';
 
-export default function canPlayerSuggestSuit(
+export function canPlayerSuggestSuit(
   player: Player,
   suit: SuitNameType | 'NONE',
   game: DebertsGame,

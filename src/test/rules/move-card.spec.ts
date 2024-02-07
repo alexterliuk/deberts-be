@@ -1,13 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { DebertsGame } from '../../client/game';
-import moveCardCheckers from '../../client/rules/move-card';
 import { SuitNameType, CardFaceType } from '../../client/data/types';
-
-const [
+import {
   isPlayerTurnToMoveCard,
   doesPlayerHaveCard,
   isCardAllowedToMove,
-] = moveCardCheckers;
+} from '../../client/rules/move-card';
 
 const game = new DebertsGame(['a', 'b', 'c', 'd']);
 const deck = game.table.deck;

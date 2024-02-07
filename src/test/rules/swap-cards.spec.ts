@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DebertsGame } from '../../client/game';
-import canPlayerSwapCards from '../../client/rules/swap-cards';
+import { canPlayerSwapCards } from '../../client/rules/swap-cards';
 import {
   SuitNameType,
   PlayerActionType,

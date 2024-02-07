@@ -4,7 +4,7 @@ import { getCardRankForCombination, hasPlayerMoved, sort } from '../utils';
 import { CardNameType, SuitNameType } from '../data/types';
 import { CardFaceType } from '../data/types';
 
-function canPlayerTradeCombination(
+export function canPlayerTradeCombination(
   records: { player: Player; combination: Card[] }[],
   game: DebertsGame,
 ) {
@@ -18,7 +18,7 @@ function canPlayerTradeCombination(
 
 type CardWithCombRankType = CardFaceType & Record<'rankForCombination', number>;
 
-function rankCombinations(
+export function rankCombinations(
   records: { player: Player; combination: Card[] }[],
   game: DebertsGame,
 ): { player: Player; combination: Card[]; win: boolean; error: number }[] {
@@ -189,7 +189,7 @@ function rankCombinations(
   return rankedCombinations;
 }
 
-function isValidCombination(combination: Card[]) {
+export function isValidCombination(combination: Card[]) {
   const isValidQty = combination.length > 2 && combination.length < 9;
   const isSameSuit = combination.every(
     card => card.suit === combination[0].suit,
@@ -220,7 +220,7 @@ function isValidCombination(combination: Card[]) {
   return true;
 }
 
-function isDebertsCombination(
+export function isDebertsCombination(
   combination: Card[],
   game: DebertsGame,
   player: Player,
@@ -241,11 +241,3 @@ function isDebertsCombination(
     (!isTradingSuitsPhase && !hasPlayerMadeAMove && combination.length === 8)
   );
 }
-
-export default [canPlayerTradeCombination, rankCombinations];
-export {
-  canPlayerTradeCombination,
-  rankCombinations,
-  isValidCombination,
-  isDebertsCombination,
-};

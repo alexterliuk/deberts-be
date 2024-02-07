@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DebertsGame } from '../../client/game';
-import canPlayerSuggestSuit from '../../client/rules/suggest-suit';
+import { canPlayerSuggestSuit } from '../../client/rules/suggest-suit';
 import {
   SuitNameType,
   PlayerActionType,

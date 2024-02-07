@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DebertsGame } from '../../client/game';
-import canPlayerDeclareBella from '../../client/rules/declare-bella';
+import { canPlayerDeclareBella } from '../../client/rules/declare-bella';
 
 const game = new DebertsGame(['a', 'b']);
 
