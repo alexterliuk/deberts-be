@@ -1,98 +1,48 @@
-import {
-  DeclareBellaActionType,
-  MoveCardActionType,
-  SuggestSuitActionType,
-  SwapCardsActionType,
-  TradeCombinationsActionType,
-} from '../data/types';
-import {
-  DeclareBellaCheckerFunctionType,
-  MoveCardCheckerFunctionType,
-  SuggestSuitCheckerFunctionType,
-  SwapCardsCheckerFunctionType,
-  TradeCombinationsCheckerFunctionType,
-} from './types';
+import { PlayerActionType, PlayerActionTypeEnum } from '../data/types';
 import { DebertsGame } from '../game';
-import { getPlayer } from '../utils/get-player';
+import { checkDeclareBella } from './check-declare-bella';
+import { checkMoveCard } from './check-move-card';
+import { checkSuggestSuit } from './check-suggest-suit';
+import { checkSwapCards } from './check-swap-cards';
+import { checkTradeCombinations } from './check-trade-combinations';
 
-export function checkMoveCard(
-  action: MoveCardActionType,
-  checkers: MoveCardCheckerFunctionType[],
+export const check = (
+  action: PlayerActionType,
   game: DebertsGame,
-) {
-  const { card } = action;
-  const player = getPlayer(game, { index: action.playerIndex });
-  const copiedCheckers = checkers.slice();
+): { error?: number; success?: boolean } => {
+  switch (action.type) {
+    case PlayerActionTypeEnum.DECLARE_BELLA: {
+      const { error } = checkDeclareBella(action, game);
+      // TODO: if error, return error not as number but as textual explanation of it
+      return error ? { error } : { success: true };
+    }
 
-  const { success, error } = copiedCheckers.reduce(
-    (acc: { success: boolean; error: number }, checker) => {
-      const result = checker(player, card, game);
+    case PlayerActionTypeEnum.MOVE_CARD: {
+      const { error } = checkMoveCard(action, game);
 
-      acc.success = result === true;
-      if (result !== true) {
-        acc = {
-          success: false,
-          error: result.error,
-        };
-        copiedCheckers.length = 0;
-      }
+      return error ? { error } : { success: true };
+    }
 
-      return acc;
-    },
-    { success: false, error: -1 },
-  );
+    case PlayerActionTypeEnum.SUGGEST_SUIT: {
+      const { error } = checkSuggestSuit(action, game);
 
-  return success || error;
-}
+      return error ? { error } : { success: true };
+    }
 
-export function checkSwapCards(
-  action: SwapCardsActionType,
-  checker: SwapCardsCheckerFunctionType,
-  game: DebertsGame,
-) {
-  const { card } = action;
+    case PlayerActionTypeEnum.SWAP_CARDS: {
+      const { error } = checkSwapCards(action, game);
 
-  const player = getPlayer(game, { index: action.playerIndex });
-  const result = checker(player, card, game);
+      return error ? { error } : { success: true };
+    }
 
-  return result === true ? true : result.error;
-}
+    case PlayerActionTypeEnum.TRADE_COMBINATIONS: {
+      const { error } = checkTradeCombinations(action, game);
 
-export function checkSuggestSuit(
-  action: SuggestSuitActionType,
-  checker: SuggestSuitCheckerFunctionType,
-  game: DebertsGame,
-) {
-  const { suit } = action;
+      return error ? { error } : { success: true };
+    }
 
-  const player = getPlayer(game, { index: action.playerIndex });
-  const result = checker(player, suit, game);
-
-  return result === true ? true : result.error;
-}
-
-export function checkDeclareBella(
-  action: DeclareBellaActionType,
-  checker: DeclareBellaCheckerFunctionType,
-  game: DebertsGame,
-) {
-  const player = getPlayer(game, { index: action.playerIndex });
-  const result = checker(player, game);
-
-  return result === true ? true : result.error;
-}
-
-export function checkTradeCombinations(
-  action: TradeCombinationsActionType,
-  checker: TradeCombinationsCheckerFunctionType,
-  game: DebertsGame,
-) {
-  const records = action.records.map(record => ({
-    player: getPlayer(game, { index: record.playerIndex }),
-    combination: record.combination,
-  }));
-
-  const result = checker(records, game);
-
-  return result;
-}
+    default: {
+      return { success: false };
+    }
+  }
+};

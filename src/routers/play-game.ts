@@ -3,8 +3,8 @@ import mongoDB from 'mongodb';
 import { DebertsGame, debertsGames } from '../client/game';
 import { DebertsGameDB, PlayerActionType } from '../client/game/types';
 import { getObjectId } from '../db/utils/get-object-id';
-import { PlayerActionTypeEnum } from '../client/data/types';
 import { validatePlayGamePayload } from './utils/validate-play-game-payload';
+import { check } from '../client/rules/check';
 
 const playGame = {
   name: 'playGame',
@@ -58,7 +58,21 @@ const playGameHandler = async (
 
     const validated = validatePlayGamePayload(payload);
 
-    return validated;
+    // return validated;
+
+    if (validated.error) {
+      return validated;
+    }
+
+    const result = check(payload, game);
+
+    if (result.error) {
+      return h.response({ error: result.error });
+    }
+
+    // TODO: if check passed successfully invoke applyAction which
+    // should return some unified object
+    // e.g. OperationResult ( type: 'CARD_MOVED', success: true | false, message: '' )
   } catch (err) {
     console.log(err);
     return h.response().code(500);
