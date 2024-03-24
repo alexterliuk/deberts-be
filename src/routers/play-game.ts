@@ -1,10 +1,11 @@
 import Hapi from '@hapi/hapi';
-import mongoDB from 'mongodb';
-import { DebertsGame, debertsGames } from '../client/game';
+import mongodb from 'mongodb';
+import { debertsGames } from '../client/game';
 import { DebertsGameDB, PlayerActionType } from '../client/game/types';
 import { getObjectId } from '../db/utils/get-object-id';
 import { validatePlayGamePayload } from './utils/validate-play-game-payload';
 import { check } from '../client/rules/check';
+import { applyAction } from '../db/operations/apply-action';
 
 const playGame = {
   name: 'playGame',
@@ -25,8 +26,9 @@ export default playGame;
  */
 const playGameHandler = async (
   req: Hapi.Request & {
-    mongo: { db: mongoDB.Db };
+    mongo: { db: mongodb.Db };
     params: { id: string };
+    query: { check: string /* 'true' or 'false' expected */ };
     payload: PlayerActionType;
   },
   h: Hapi.ResponseToolkit,
@@ -39,40 +41,47 @@ const playGameHandler = async (
     }
 
     const gameId = gameObjectId.toString();
-    let game = debertsGames.get(gameId);
+    const gameDB = await req.mongo.db
+      .collection('games')
+      .findOne<DebertsGameDB>({ _id: gameObjectId });
 
-    if (game === null) {
-      const gameDB = await req.mongo.db
-        .collection('games')
-        .findOne<DebertsGameDB>({ _id: gameObjectId });
-
-      if (gameDB) {
-        debertsGames.restore(gameDB, gameId);
-        game = debertsGames.get(gameId);
-      } else {
-        h.response().code(404);
-      }
+    if (!gameDB) {
+      return h.response().code(404);
     }
 
-    const payload = req.payload;
+    const game =
+      debertsGames.get(gameId) ||
+      (() => {
+        debertsGames.restore(gameDB, gameId);
 
-    const validated = validatePlayGamePayload(payload);
+        return debertsGames.get(gameId);
+      })();
 
-    // return validated;
+    const validated = validatePlayGamePayload(req.payload);
 
     if (validated.error) {
       return validated;
     }
 
-    const result = check(payload, game);
+    const shouldCheckRules = req.query.check === 'true' ? true : false;
+
+    const result = shouldCheckRules
+      ? check(req.payload, game)
+      : { success: true, error: false };
 
     if (result.error) {
       return h.response({ error: result.error });
     }
 
-    // TODO: if check passed successfully invoke applyAction which
-    // should return some unified object
-    // e.g. OperationResult ( type: 'CARD_MOVED', success: true | false, message: '' )
+    const applied = await applyAction(game, gameObjectId, req.payload);
+
+    if (applied.error) {
+      return h.response({ error: applied.error });
+    } else {
+      // TODO: should be one more query parameter for whether to return gameDB or undefined
+      // return h.response(applied?.gameDB || undefined).code(200);
+      return h.response().code(200);
+    }
   } catch (err) {
     console.log(err);
     return h.response().code(500);

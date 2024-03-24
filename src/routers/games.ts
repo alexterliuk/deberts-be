@@ -1,5 +1,5 @@
 import Hapi from '@hapi/hapi';
-import mongoDB from 'mongodb';
+import mongodb from 'mongodb';
 import { DebertsGame, debertsGames } from '../client/game';
 import { createGameSchema } from '../client/data/schemas';
 import { serializeDebertsGame } from '../client/game/sr/serialize-deberts-game';
@@ -53,7 +53,7 @@ export default games;
  */
 const createGameHandler = async (
   req: Hapi.Request & {
-    mongo: { db: mongoDB.Db };
+    mongo: { db: mongodb.Db };
     payload: string[];
   },
   h: Hapi.ResponseToolkit,
@@ -104,7 +104,7 @@ const createGameHandler = async (
  */
 const getGameHandler = async (
   req: Hapi.Request & {
-    mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor }; // TODO: ObjectID is not needed
+    mongo: { db: mongodb.Db; ObjectID: FunctionConstructor }; // TODO: ObjectID is not needed
     params: { id?: string }; // TODO: explain why id is optional here and in other places
   },
   h: Hapi.ResponseToolkit,
@@ -137,7 +137,7 @@ const getGameHandler = async (
  */
 const deleteGameHandler = async (
   req: Hapi.Request & {
-    mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
+    mongo: { db: mongodb.Db; ObjectID: FunctionConstructor };
     params: { id?: string };
   },
   h: Hapi.ResponseToolkit,
@@ -164,7 +164,7 @@ const deleteGameHandler = async (
  */
 const getGameRecordHandler = async (
   req: Hapi.Request & {
-    mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
+    mongo: { db: mongodb.Db; ObjectID: FunctionConstructor };
     params: { id?: string };
   },
   h: Hapi.ResponseToolkit,
@@ -209,7 +209,7 @@ const getGameRecordHandler = async (
  */
 const getGameRecordsHandler = async (
   req: Hapi.Request & {
-    mongo: { db: mongoDB.Db; ObjectID: FunctionConstructor };
+    mongo: { db: mongodb.Db; ObjectID: FunctionConstructor };
   },
   h: Hapi.ResponseToolkit,
 ) => {
