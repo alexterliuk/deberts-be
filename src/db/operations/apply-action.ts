@@ -4,6 +4,7 @@ import { DebertsGame } from '../../client/game';
 import { PlayerActionTypeEnum } from '../../client/data/types';
 import { applyDeclareBella } from './apply-declare-bella';
 import { applyMoveCard } from './apply-move-card';
+import { applySuggestSuit } from './apply-suggest-suit';
 
 export const applyAction = async (
   game: DebertsGame,
@@ -17,6 +18,10 @@ export const applyAction = async (
 
     case PlayerActionTypeEnum.MOVE_CARD: {
       return await applyMoveCard(game, gameId, action);
+    }
+
+    case PlayerActionTypeEnum.SUGGEST_SUIT: {
+      return await applySuggestSuit(game, gameId, action);
     }
 
     default: {
